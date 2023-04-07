@@ -1,0 +1,66 @@
+:root {
+    --blue: #2468ad;
+    --lightGrey: #e6e6e6;
+    --grey: #373737;
+    --black: #000000;
+    --white: #ffffff;
+
+    --fontSizeSmall: 1.15rem;
+    --fontSizeMed: 1.25rem;
+    --fontSizeBig: 2.75rem;
+    --fontSizeXBig: 4rem;
+}
+
+@media (max-width: 720px) {
+    .MuiTypography-h5 + div {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+* {
+    color: var(--black); 
+}
+
+body {
+    height: 100vh;
+    background-color: var(--lightGrey);
+}
+
+input#desperdicio, input#ganancia {
+    text-align: left;
+    padding-left: 10em;
+}
+
+#error, #resultado {
+    display: none;
+    width: -webkit-fill-available;
+}
+
+.logoBox {
+    display: flex;
+    justify-content: center;
+}
+
+.logo{
+    width: 210px;
+    height: auto;
+    padding: 40px;
+}
+
+button {
+    font-size: var(--fontSizeSmall) !important;
+}
+
+.resultado {
+    font-size: var(--fontSizeBig);
+    padding: 0;
+    margin: 0;
+    color: #4caf50;
+}
+
+.highlight {
+    color: var(--blue);
+    font-size:var(--fontSizeSmall);
+    padding: 5px;
+    font-weight: bold;
+}
