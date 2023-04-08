@@ -11,7 +11,7 @@
     --fontSizeXBig: 4rem;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 600px) {
     .MuiTypography-h5 + div {
         grid-template-columns: repeat(1, 1fr);
     }

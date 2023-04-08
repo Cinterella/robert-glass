@@ -68,13 +68,13 @@ const ShowVidTable = () => {
               <OutlinedInput
                 id="base"
                 label="base"
-                endAdornment={<InputAdornment position="end">m²</InputAdornment>}
+                endAdornment={<InputAdornment position="end">metros</InputAdornment>}
                 aria-describedby="outlined-weight-helper-text-base"
                 inputProps={{
                   'aria-label': 'base',
                 }}
               />
-            <FormHelperText id="helper-text-valor-base">* Ingresar solo numeros.</FormHelperText>
+            <FormHelperText id="helper-text-valor-base">* Valor expresado en metros.</FormHelperText>
             </FormControl>
           </Item>
 
@@ -84,13 +84,13 @@ const ShowVidTable = () => {
               <OutlinedInput
                 id="altura"
                 label="altura"
-                endAdornment={<InputAdornment position="end">m²</InputAdornment>}
+                endAdornment={<InputAdornment position="end">metros</InputAdornment>}
                 aria-describedby="outlined-weight-helper-text-altura"
                 inputProps={{
                   'aria-label': 'altura',
                 }}
                 />
-              <FormHelperText id="helper-text-valor-altura">* Ingresar solo numeros.</FormHelperText>
+              <FormHelperText id="helper-text-valor-altura">* Valor expresado en metros.</FormHelperText>
             </FormControl>
           </Item>
 
@@ -98,7 +98,7 @@ const ShowVidTable = () => {
             <FormControl sx={{ m: 0, width: WIDTHINPUT }}>                
               <TextField
                 id="desperdicio"
-                label="desperdicio ($)"
+                label="desperdicio (%)"
                 type="number"
                 value={valueDesperdicio}
                 variant="outlined"
@@ -131,8 +131,7 @@ const ShowVidTable = () => {
         
         <Item>
         <Typography variant="string" sx={{ m:1 }} >
-          <p>Fórmula:</p>
-          [ $ VIDRIO x BASE m² x ALTURA m² + DESPERDICIO + TERMINADO ] x GANANCIA%
+          <p>Fórmula:</p>[ ( $ VIDRIO x BASE x ALTURA x DESPERDICIO ) + TERMINADO ] x GANANCIA%
         </Typography>
       </Item>
 

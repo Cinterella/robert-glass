@@ -33,6 +33,7 @@ function calcularPrecio () {
           VALUE_TERMINADO = Number(0);
         }
 
+        VALUE_DESPERDICIO = ( Number(VALUE_DESPERDICIO) / Number(100) )+1;
         if (VALUE_DESPERDICIO === '') {
           VALUE_DESPERDICIO = Number(0);
         }
@@ -42,12 +43,12 @@ function calcularPrecio () {
           VALUE_GANANCIA = Number(0);
         }
 
-        let RESULTADO = [ VALUE_BASE * VALUE_ALTURA * VALUE_TIPOVID + Number(VALUE_DESPERDICIO) + VALUE_TERMINADO ] * VALUE_GANANCIA;
+        let RESULTADO = [ ( VALUE_BASE * VALUE_ALTURA * VALUE_TIPOVID * VALUE_DESPERDICIO ) + VALUE_TERMINADO ] * VALUE_GANANCIA;
         RESULTADO = RESULTADO.toFixed(2);
 
         document.getElementById("error").parentElement.style.display = "none";        
         document.getElementById("resultado").lastChild.innerHTML = 
-        "El precio por <strong>\""+ MATERIAL_SELECCIONADO +"\"</strong> de <strong>"+ VALUE_BASE+"m² Ancho</strong> por <strong>"+ VALUE_ALTURA+"m² Alto</strong> es: <div class='resultado'>$" + RESULTADO+"</div>";
+        "El precio por <strong>\""+ MATERIAL_SELECCIONADO +"\"</strong> de <strong>"+ VALUE_BASE+"m de Ancho</strong> por <strong>"+ VALUE_ALTURA+"m de Alto</strong> es: <div class='resultado'>$" + RESULTADO+"</div>";
         document.getElementById("resultado").style.display = "flex";
 
     }
