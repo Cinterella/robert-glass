@@ -56,7 +56,7 @@ function calcularPrecio () {
       "Precio por <strong>\""+ MATERIAL_SELECCIONADO +"\""+VALUE_SELTERMINADO+"</strong> de <strong>"+ VALUE_BASE+"m de Ancho</strong> por <strong>"+ VALUE_ALTURA+"m de Alto</strong><strong></strong>.<div class='resultado'>$" + RESULTADO+"</div>";
       document.getElementById("resultado").style.display = "flex";
       document.getElementById("enviarWABox").style.display = "flex";
-      window.presupuesto = "Precio por *"+ MATERIAL_SELECCIONADO + VALUE_SELTERMINADO + "* de *"+ VALUE_BASE+"m de Ancho* por *"+ VALUE_ALTURA+"m de Alto* :*$" + RESULTADO+"*.";
+      window.presupuesto = "Precio por *"+ MATERIAL_SELECCIONADO + VALUE_SELTERMINADO + "* de *"+ VALUE_BASE+"m de Ancho* por *"+ VALUE_ALTURA+"m de Alto*: *$" + RESULTADO+"*.";
     }
 }
 
