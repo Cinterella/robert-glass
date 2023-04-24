@@ -3,8 +3,8 @@ module.exports = global.config = {
         apiKey: "AIzaSyDOiY3PhAPrG00y5QCRtdRfFLjbMUZW2ic",
         spreadsheetId: "1DXwF8K0KhdUe6tDM8ZzIHkS_CUcdP-Lomj5eTIw_oxE",
         ranges: {
-            vidrios: "vidrieria!A2:B50",
-            terminado: "vidrieria!C2:D10"
+            vidrios: "vidrieria!A2:C50",
+            terminado: "vidrieria!A2:E5"
         }
     },
     alerts: {
@@ -13,6 +13,9 @@ module.exports = global.config = {
     widths: {
         input: '100%',
         alert: '80%'
+    },
+    colors: {
+        wa: "d6d6d6"
     }
 
     //const APIKEY = "AIzaSyDOiY3PhAPrG00y5QCRtdRfFLjbMUZW2ic";

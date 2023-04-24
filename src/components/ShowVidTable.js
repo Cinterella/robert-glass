@@ -17,8 +17,10 @@ import Alert from '@mui/material/Alert';
 
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import SendWABtn from "./SendWABtn";
 
 const WIDTHINPUT = global.config.widths.input;
+const colorsWa = global.config.colors.wa;
 
 function Item(props: BoxProps) {
   const { sx, ...other } = props;
@@ -130,10 +132,10 @@ const ShowVidTable = () => {
         </Box>
         
         <Item>
-        <Typography variant="string" sx={{ m:1 }} >
-          <p>Fórmula:</p>[ ( $ VIDRIO x BASE x ALTURA x DESPERDICIO ) + TERMINADO ] x GANANCIA%
-        </Typography>
-      </Item>
+          <Typography variant="string" sx={{ m:1 }} >
+            <p>Fórmula:</p>[ ( $ VIDRIO x BASE x ALTURA x DESPERDICIO ) + TERMINADO ] x GANANCIA%
+          </Typography>
+        </Item>
 
         <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', }}>
           <ShowResultButton />
@@ -148,6 +150,15 @@ const ShowVidTable = () => {
             <Alert size="lg" id='resultado' variant="outlined" severity="success" sx={{ m: 0 }}></Alert>
           </Item>
         </Box>
+
+        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', }}>
+          <Item>
+            
+            <SendWABtn />
+            
+          </Item>
+        </Box>
+
       </Box>
     </Fragment>
 

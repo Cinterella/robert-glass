@@ -18,7 +18,7 @@
 }
 
 * {
-    color: var(--black); 
+    /* color: var(--black);  */
 }
 
 body {
@@ -63,4 +63,12 @@ button {
     font-size:var(--fontSizeSmall);
     padding: 5px;
     font-weight: bold;
+}
+
+#enviarWABox {
+    display: none;
+}
+
+.css-hswe6l-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: #1565c0 !important;
 }

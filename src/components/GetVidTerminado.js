@@ -18,6 +18,15 @@ function GetVidTerminado() {
   const [selects, setSelects] = useState("");
   const [data, setData] = useState([]);
 
+  const handleSelectChange = (event) => {
+    // Update the state with the selected option
+    setSelects(event.target.value);
+    let optionSelectedValue = event.target.value;
+        optionSelectedValue = optionSelectedValue.split('-');
+    //console.log(optionSelectedValue);
+    document.getElementById('terminado').innerText = optionSelectedValue[2];
+  };
+
   useEffect(() => {
     // Load the Google API client library
     gapi.load("client", () => {
@@ -55,15 +64,15 @@ function GetVidTerminado() {
           labelId="demo-simple-select-label"
           value={selects}
           label="terminado"
-          onChange={e=>setSelects(e.target.value)}
+          onChange={handleSelectChange}
           >
           {data.map((row, index) => (
-            <MenuItem key={index} value={row[1]}>{row[0]}</MenuItem>
+            <MenuItem key={index} value={row[0]+'-'+row[3]+'-'+row[4]}>{row[3]}</MenuItem>
           ))}
         </Select>
         <FormHelperText id="helper-text-precio-terminado">
           Precio de lista: $ 
-          <span id='terminado' className='highlight'>{selects}</span>
+          <span id='terminado' className='highlight'></span>
         </FormHelperText>
       </FormControl>
     </Fragment>

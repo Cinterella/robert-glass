@@ -15,12 +15,16 @@ const SPREADSHEET_ID = global.config.credentials.spreadsheetId;
 const RANGE = global.config.credentials.ranges.vidrios;
 
 function GetVidTipo() {
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState('');
   const [data, setData] = useState([]);
 
   const handleSelectChange = (event) => {
     // Update the state with the selected option
-    setSelectedOption(event.target.value); 
+    setSelectedOption(event.target.value);
+    let optionSelectedValue = event.target.value;
+        optionSelectedValue = optionSelectedValue.split('-');
+    //console.log(optionSelectedValue);
+    document.getElementById('tipoVid').innerText = optionSelectedValue[2];
   };
 
   useEffect(() => {
@@ -64,13 +68,11 @@ function GetVidTipo() {
           autoWidth
           >      
           {data.map((row, index) => (
-            <MenuItem key={index} value={row[1]}>{row[0]}</MenuItem>
-            ))}
+            <MenuItem key={index} value={row[0]+'-'+row[1]+'-'+row[2]}>{row[1]}</MenuItem>
+          ))}
         </Select>
         <FormHelperText id="helper-text-precio-tipo">
-          Precio de lista: $ 
-          <span id='tipoVid' className='highlight'>{selectedOption}</span> 
-          x m²
+          Precio de lista: $ <span id='tipoVid' className='highlight'></span> x m²
         </FormHelperText>
       </FormControl>
     </Fragment>
