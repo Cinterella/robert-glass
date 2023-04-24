@@ -69,6 +69,6 @@ button {
     display: none;
 }
 
-.css-hswe6l-MuiButtonBase-root-MuiButton-root:hover {
+.css-hswe6l-MuiButtonBase-root-MuiButton-root:hover, .css-byfwie:hover {
     background-color: #1565c0 !important;
 }
