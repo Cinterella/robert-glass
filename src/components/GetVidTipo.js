@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { useEffect, useState } from "react";
-import { gapi } from "gapi-script";
 import config from "../config";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,10 +10,11 @@ import FormControl from '@mui/material/FormControl';
 const WIDTHINPUT = global.config.widths.input;
 
 const APIKEY = global.config.credentials.apiKey;
-const SPREADSHEET_ID = global.config.credentials.spreadsheetId;
-const RANGE = global.config.credentials.ranges.vidrios;
+const SPREADSHEETID = global.config.credentials.spreadsheetId;
+const RANGE = global.config.credentials.ranges.total;
 
 function GetVidTipo() {
+  const [cards, setCards] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [data, setData] = useState([]);
 
@@ -23,42 +23,54 @@ function GetVidTipo() {
     setSelectedOption(event.target.value);
     let optionSelectedValue = event.target.value;
         optionSelectedValue = optionSelectedValue.split('-');
-    //console.log(optionSelectedValue);
     document.getElementById('tipoVid').innerText = optionSelectedValue[2];
   };
 
   useEffect(() => {
-    // Load the Google API client library
-    gapi.load("client", () => {
-      gapi.client.init({
-        apiKey: APIKEY,
-        discoveryDocs: [
-          "https://sheets.googleapis.com/$discovery/rest?version=v4",
-        ]
-      });
+    const fetchSheetData = async () => {
+      try {
+        // Use the Google Sheets API to fetch the data from your spreadsheet
+        //apiKey: "AIzaSyAIxeepIrQjzBOW23khBcC8SltbHGxQFPQ",
+        //spreadsheetId: "1aw-hW9nUVYyeL02lei1FoO7SxFKIOPgU5ovDQaMC5wk",
+        //range: "puestos!A2:P8"
+        const response = await fetch(
+          "https://sheets.googleapis.com/v4/spreadsheets/"+SPREADSHEETID+"/values/"+RANGE+"?key="+APIKEY
+        );
 
-      // Authenticate the user and load the spreadsheet data
-      gapi.client.load("sheets", "v4", () => {
-        gapi.client.sheets.spreadsheets.values
-          .get({
-            spreadsheetId: SPREADSHEET_ID,
-            range: RANGE,
-          })          
-          .then((response) => {
-            setData(response.result.values);
-          })
-          .catch((error) => {
-            console.log("Error loading data from Google Sheets:", error);
-          });
-      });
-    });    
+        if (!response.ok) {
+          throw new Error('Failed to fetch data from the spreadsheet.');
+        }
+        
+        const data = await response.json();
+
+        // Process the fetched data and transform it into the required format
+        const transformedData = data.values.map((row) => ({
+            //key	pasillo	local	nombre	categoria	detalle	icono	instagram	facebook	whatsapp	web	mail	imagen	description
+            KEY: row[0],
+            TIPOVIDRIO: row[1],
+            PRECIOVIDRIO: row[2],
+            TERMINADO: row[3],
+            PRECIOTERMINADO: row[4],
+            VARILLA: row[5],
+            PRECIOVARILLA: row[6],
+            PASPARTU: row[7],
+            PRECIOPASPARTU: row[8],
+          }));
+       
+        setData(transformedData);
+      } catch (error) {
+        console.error('Error fetching data from spreadsheet:', error);
+      }
+    };
+
+    fetchSheetData();
   }, []);
   
   return (
 
     <Fragment>
       <FormControl required sx={{ m: 0, width: WIDTHINPUT }}>
-        <InputLabel id="label-tipo">Tipo</InputLabel>
+        <InputLabel id="label-tipo">Tipo Vidrio</InputLabel>
         <Select
           id="selTipoVidSel"
           labelId="demo-simple-select-label"
@@ -68,7 +80,7 @@ function GetVidTipo() {
           autoWidth
           >      
           {data.map((row, index) => (
-            <MenuItem key={index} value={row[0]+'-'+row[1]+'-'+row[2]}>{row[1]}</MenuItem>
+            <MenuItem key={index} value={row.KEY+'-'+row.TIPOVIDRIO+'-'+row.PRECIOVIDRIO}>{row.TIPOVIDRIO}</MenuItem>
           ))}
         </Select>
         <FormHelperText id="helper-text-precio-tipo">

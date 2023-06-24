@@ -13,7 +13,12 @@
 
 @media (max-width: 600px) {
     .MuiTypography-h5 + div {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+    
+    .css-1mugobz {
+        grid-template-columns: repeat(1, 1fr) !important;
+
     }
 }
 
@@ -32,6 +37,14 @@ input#desperdicio, input#ganancia {
 }
 
 #error, #resultado {
+    display: none;
+    width: -webkit-fill-available;
+}
+
+#error-cuadro-vidrio,
+#error-cuadro-varilla,
+#error-cuadro-paspartu,
+#resultado-cuadro {
     display: none;
     width: -webkit-fill-available;
 }

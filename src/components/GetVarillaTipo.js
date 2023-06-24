@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useEffect, useState } from "react";
+//import { gapi } from "gapi-script";
 import config from "../config";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,17 +12,17 @@ const WIDTHINPUT = global.config.widths.input;
 
 const APIKEY = global.config.credentials.apiKey;
 const SPREADSHEETID = global.config.credentials.spreadsheetId;
-const RANGE = global.config.credentials.ranges.terminado;
+const RANGE = global.config.credentials.ranges.varillas;
 
-function GetVidTerminado() {
-  const [selects, setSelects] = useState("");
+function GetVidTipo() {
+  const [selectedOption, setSelectedOption] = useState('');
   const [data, setData] = useState([]);
 
   const handleSelectChange = (event) => {
-    setSelects(event.target.value);
+    setSelectedOption(event.target.value);
     let optionSelectedValue = event.target.value;
         optionSelectedValue = optionSelectedValue.split('-');
-    document.getElementById('terminado').innerText = optionSelectedValue[2];
+        document.getElementById('tipoVarilla').innerText = optionSelectedValue[2];
   };
 
   useEffect(() => {
@@ -37,10 +38,11 @@ function GetVidTerminado() {
 
         const data = await response.json();
 
+        //const transformedData = data.values.map((row) => ({
         const transformedData = data.values.map((row) => ({
             KEY: row[0],
-            TERMINADO: row[3],
-            PRECIOTERMINADO: row[4],
+            TIPOVARILLA: row[5],
+            PRECIOVARILLA: row[6],
           }));
        
         setData(transformedData);
@@ -51,31 +53,33 @@ function GetVidTerminado() {
 
     fetchSheetData();
   }, []);
-
+  
   return (
-      
+
     <Fragment>
-      <FormControl sx={{ m: 0, width: WIDTHINPUT }}>
-        <InputLabel id="label-terminado">Terminado</InputLabel>
+      <FormControl required sx={{ m: 0, width: WIDTHINPUT }}>
+        <InputLabel id="label-tipo">Tipo Varilla</InputLabel>
         <Select
-          id="selTerminado"
+          id="selTipoVarillaSel"
           labelId="demo-simple-select-label"
-          value={selects}
-          label="terminado"
+          value={selectedOption}
+          label="tipo"
           onChange={handleSelectChange}
-          >
+          autoWidth
+          >      
+          
           {data.map((row, index) => (
-            <MenuItem key={index} value={row.KEY+'-'+row.TERMINADO+'-'+row.PRECIOTERMINADO}>{row.TERMINADO}</MenuItem>
+            <MenuItem key={index} value={row.KEY+'-'+row.TIPOVARILLA+'-'+row.PRECIOVARILLA}>{row.TIPOVARILLA ? row.TIPOVARILLA : 'NA'}</MenuItem>
           ))}
         </Select>
-        <FormHelperText id="helper-text-precio-terminado">
-          Precio de lista: $ 
-          <span id='terminado' className='highlight'></span>
+        <FormHelperText id="helper-text-precio-tipo">
+          Precio de lista: $ <span id='tipoVarilla' className='highlight'></span> x m
         </FormHelperText>
       </FormControl>
     </Fragment>
-
+    
   );
+
 }
 
-export default GetVidTerminado;
+export default GetVidTipo;

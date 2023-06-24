@@ -11,22 +11,28 @@ const WIDTHINPUT = global.config.widths.input;
 
 const APIKEY = global.config.credentials.apiKey;
 const SPREADSHEETID = global.config.credentials.spreadsheetId;
-const RANGE = global.config.credentials.ranges.terminado;
+const RANGE = global.config.credentials.ranges.total;
 
-function GetVidTerminado() {
-  const [selects, setSelects] = useState("");
+function GetVidTipo() {
+  const [cards, setCards] = useState([]);
+  const [selectedOption, setSelectedOption] = useState('');
   const [data, setData] = useState([]);
 
   const handleSelectChange = (event) => {
-    setSelects(event.target.value);
+    // Update the state with the selected option
+    setSelectedOption(event.target.value);
     let optionSelectedValue = event.target.value;
         optionSelectedValue = optionSelectedValue.split('-');
-    document.getElementById('terminado').innerText = optionSelectedValue[2];
+    document.getElementById('tipoVid').innerText = optionSelectedValue[2];
   };
 
   useEffect(() => {
     const fetchSheetData = async () => {
       try {
+        // Use the Google Sheets API to fetch the data from your spreadsheet
+        //apiKey: "AIzaSyAIxeepIrQjzBOW23khBcC8SltbHGxQFPQ",
+        //spreadsheetId: "1aw-hW9nUVYyeL02lei1FoO7SxFKIOPgU5ovDQaMC5wk",
+        //range: "puestos!A2:P8"
         const response = await fetch(
           "https://sheets.googleapis.com/v4/spreadsheets/"+SPREADSHEETID+"/values/"+RANGE+"?key="+APIKEY
         );
@@ -34,13 +40,21 @@ function GetVidTerminado() {
         if (!response.ok) {
           throw new Error('Failed to fetch data from the spreadsheet.');
         }
-
+        
         const data = await response.json();
 
+        // Process the fetched data and transform it into the required format
         const transformedData = data.values.map((row) => ({
+            //key	pasillo	local	nombre	categoria	detalle	icono	instagram	facebook	whatsapp	web	mail	imagen	description
             KEY: row[0],
+            TIPOVIDRIO: row[1],
+            PRECIOVIDRIO: row[2],
             TERMINADO: row[3],
             PRECIOTERMINADO: row[4],
+            VARILLA: row[5],
+            PRECIOVARILLA: row[6],
+            PASPARTU: row[7],
+            PRECIOPASPARTU: row[8],
           }));
        
         setData(transformedData);
@@ -51,31 +65,32 @@ function GetVidTerminado() {
 
     fetchSheetData();
   }, []);
-
+  
   return (
-      
+
     <Fragment>
-      <FormControl sx={{ m: 0, width: WIDTHINPUT }}>
-        <InputLabel id="label-terminado">Terminado</InputLabel>
+      <FormControl required sx={{ m: 0, width: WIDTHINPUT }}>
+        <InputLabel id="label-tipo">Tipo Vidrio</InputLabel>
         <Select
-          id="selTerminado"
+          id="selTipoVidSelCuadro"
           labelId="demo-simple-select-label"
-          value={selects}
-          label="terminado"
+          value={selectedOption}
+          label="tipo"
           onChange={handleSelectChange}
-          >
+          autoWidth
+          >      
           {data.map((row, index) => (
-            <MenuItem key={index} value={row.KEY+'-'+row.TERMINADO+'-'+row.PRECIOTERMINADO}>{row.TERMINADO}</MenuItem>
+            <MenuItem key={index} value={row.KEY+'-'+row.TIPOVIDRIO+'-'+row.PRECIOVIDRIO}>{row.TIPOVIDRIO}</MenuItem>
           ))}
         </Select>
-        <FormHelperText id="helper-text-precio-terminado">
-          Precio de lista: $ 
-          <span id='terminado' className='highlight'></span>
+        <FormHelperText id="helper-text-precio-tipo">
+          Precio de lista: $ <span id='tipoVid' className='highlight'></span> x m²
         </FormHelperText>
       </FormControl>
     </Fragment>
-
+    
   );
+
 }
 
-export default GetVidTerminado;
+export default GetVidTipo;

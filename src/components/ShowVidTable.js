@@ -5,7 +5,7 @@ import config from "../config";
 import GetVidTipo from './GetVidTipo';
 import GetVidTerminado from './GetVidTerminado';
 import ShowResultButton from "./ShowResultButton";
-import logo from '../img/logo.svg';
+
 
 import Box, { BoxProps } from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
@@ -47,13 +47,10 @@ const ShowVidTable = () => {
 
   return (
     <Fragment>
-      <div className='logoBox'>
-        <img className='logo' src={logo} alt="Robert Glass logo" />
-      </div>
 
       <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', backgroundColor: '#fff', borderRadius: 2, p:2 }}>
         
-        <Typography variant="h5" sx={{ m:1}} >Cálculo Vidriería</Typography>
+        {/* <Typography variant="h5" sx={{ m:1}} >Cálculo Vidriería</Typography> */}
 
         <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)' }}>
           <Item>
