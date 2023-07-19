@@ -14,7 +14,7 @@ const APIKEY = global.config.credentials.apiKey;
 const SPREADSHEETID = global.config.credentials.spreadsheetId;
 const RANGE = global.config.credentials.ranges.varillas;
 
-function GetVidTipo() {
+function GetVarillaTipo() {
   const [selectedOption, setSelectedOption] = useState('');
   const [data, setData] = useState([]);
 
@@ -63,7 +63,7 @@ function GetVidTipo() {
           id="selTipoVarillaSel"
           labelId="demo-simple-select-label"
           value={selectedOption}
-          label="tipo"
+          label="Tipo Varilla"
           onChange={handleSelectChange}
           autoWidth
           >      
@@ -82,4 +82,4 @@ function GetVidTipo() {
 
 }
 
-export default GetVidTipo;
+export default GetVarillaTipo;

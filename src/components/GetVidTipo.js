@@ -11,10 +11,10 @@ const WIDTHINPUT = global.config.widths.input;
 
 const APIKEY = global.config.credentials.apiKey;
 const SPREADSHEETID = global.config.credentials.spreadsheetId;
-const RANGE = global.config.credentials.ranges.total;
+const RANGE = global.config.credentials.ranges.vidrios;
 
 function GetVidTipo() {
-  const [cards, setCards] = useState([]);
+  //const [cards, setCards] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [data, setData] = useState([]);
 
@@ -49,12 +49,6 @@ function GetVidTipo() {
             KEY: row[0],
             TIPOVIDRIO: row[1],
             PRECIOVIDRIO: row[2],
-            TERMINADO: row[3],
-            PRECIOTERMINADO: row[4],
-            VARILLA: row[5],
-            PRECIOVARILLA: row[6],
-            PASPARTU: row[7],
-            PRECIOPASPARTU: row[8],
           }));
        
         setData(transformedData);
@@ -75,7 +69,7 @@ function GetVidTipo() {
           id="selTipoVidSel"
           labelId="demo-simple-select-label"
           value={selectedOption}
-          label="tipo"
+          label="Tipo Vidrio"
           onChange={handleSelectChange}
           autoWidth
           >      

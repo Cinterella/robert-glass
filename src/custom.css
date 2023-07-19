@@ -11,12 +11,12 @@
     --fontSizeXBig: 4rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 720px) {
     .MuiTypography-h5 + div {
         grid-template-columns: repeat(1, 1fr) !important;
     }
     
-    .css-1mugobz {
+    .css-1mugobz, .css-1c7cv4h {
         grid-template-columns: repeat(1, 1fr) !important;
 
     }
@@ -37,8 +37,8 @@ input#desperdicio, input#ganancia {
 }
 
 #error, #resultado {
-    display: none;
-    width: -webkit-fill-available;
+    /* display: none;
+    width: -webkit-fill-available; */
 }
 
 #error-cuadro-vidrio,
@@ -55,9 +55,9 @@ input#desperdicio, input#ganancia {
 }
 
 .logo{
-    width: 210px;
+    width: 180px;
     height: auto;
-    padding: 40px;
+    padding: 20px 30px;
 }
 
 button {

@@ -14,7 +14,7 @@ const APIKEY = global.config.credentials.apiKey;
 const SPREADSHEETID = global.config.credentials.spreadsheetId;
 const RANGE = global.config.credentials.ranges.paspartu;
 
-function GetVidTipo() {
+function GetPaspartuTipo() {
   const [selectedOption, setSelectedOption] = useState('');
   const [data, setData] = useState([]);
 
@@ -62,7 +62,7 @@ function GetVidTipo() {
           id="selTipoPaspartuSel"
           labelId="demo-simple-select-label"
           value={selectedOption}
-          label="tipo"
+          label="Tipo Paspartu"
           onChange={handleSelectChange}
           autoWidth
           >      
@@ -80,4 +80,4 @@ function GetVidTipo() {
 
 }
 
-export default GetVidTipo;
+export default GetPaspartuTipo;
