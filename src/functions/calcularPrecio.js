@@ -86,12 +86,18 @@ export function calcularPrecio( selectedOption, selectTerminado, selectedPorcTer
     let VARILLA_SELECCIONADO = document.getElementById('selTipoVarillaSel').innerText;
     let PASPARTU_SELECCIONADO = document.getElementById('selTipoPaspartuSel').innerText;
 
+    console.log("MATERIAL_SELECCIONADO: " + MATERIAL_SELECCIONADO)
+    console.log("TERMINADO_SELECCIONADO: " + TERMINADO_SELECCIONADO)
+    console.log("VARILLA_SELECCIONADO: " + VARILLA_SELECCIONADO)
+    console.log("PASPARTU_SELECCIONADO: " + PASPARTU_SELECCIONADO)
+
     if(VarillaisChecked){
-      if (VALUE_TIPO_VARILLA === "" || selectedDespVarilla === "" || selectedDespVarilla === window.empty2) {
+      if (VARILLA_SELECCIONADO === "" || VALUE_TIPO_VARILLA === "" || selectedDespVarilla === "" || selectedDespVarilla === window.empty2) {
         document.getElementById("error").style.display = "flex";
         document.getElementsByClassName("varillas")[0].innerHTML = "Debe seleccionar un <strong>TIPO DE VARILLAS</strong> y su PORCENTAJE DE DESPERDICIO.<br>";
         varillaOK = false;
       }else{
+        varillaOK = true;
         PRECIO_POR_VARILLA = [ ( (VALUE_BASE + VALUE_ALTURA ) * 2 ) * VALUE_TIPO_VARILLA ] * selectedDespVarilla;
         console.log("PRECIO_POR_VARILLA: "+PRECIO_POR_VARILLA);
         RESULTADO = RESULTADO + (PRECIO_POR_VARILLA);
@@ -99,6 +105,7 @@ export function calcularPrecio( selectedOption, selectTerminado, selectedPorcTer
         document.getElementsByClassName("varillas")[0].innerHTML = "";
       }
     }else{ 
+      varillaOK = true;
       VARILLA_SELECCIONADO = "N/A";
       document.getElementsByClassName("varillas")[0].innerHTML = "";
     }
@@ -106,11 +113,12 @@ export function calcularPrecio( selectedOption, selectTerminado, selectedPorcTer
 
 
     if(PaspartuisChecked){
-      if (VALUE_TIPO_PASPARTU === "" || selectedDespPaspartu === "" || selectedDespPaspartu === window.empty2) {
+      if (PASPARTU_SELECCIONADO === "" || VALUE_TIPO_PASPARTU === "" || selectedDespPaspartu === "" || selectedDespPaspartu === window.empty2) {
         document.getElementById("error").style.display = "flex";
         document.getElementsByClassName("paspartu")[0].innerHTML = 'Debe seleccionar un <strong>TIPO DE PASPARTÚ</strong> y su porcentaje de desperdicio.';
         paspartuOK = false;
       }else{
+        paspartuOK = true;
         PRECIO_POR_PASPARTU = [ ( VALUE_BASE * VALUE_ALTURA ) * VALUE_TIPO_PASPARTU ] * selectedDespPaspartu;
         console.log("PRECIO_POR_PASPARTU: "+ PRECIO_POR_PASPARTU);
         RESULTADO = RESULTADO + (PRECIO_POR_PASPARTU);
@@ -119,39 +127,43 @@ export function calcularPrecio( selectedOption, selectTerminado, selectedPorcTer
         document.getElementsByClassName("paspartu")[0].innerHTML = "";
       }
     }else{ 
+      paspartuOK = true;
       PASPARTU_SELECCIONADO = "N/A";
       document.getElementsByClassName("paspartu")[0].innerHTML = "";
-      //paspartuOK = true;
     }
 
 
+    if( varillaOK && paspartuOK ){
+      if( selectedGanancia === '' || selectedGanancia === window.empty1 || selectedGanancia === window.empty2 ){
+        document.getElementById("error").style.display = "flex";
+        document.getElementById("enviarWABox").style.display = "none";
+        document.getElementById("message").innerHTML += "Seleccione un porcentaje de GANANCIA.<br>";
+        //gananciaOK = false;
+      }else{
+        document.getElementById("error").style.display = "flex";
+        if(RESULTADO > 0) {
+          document.getElementById("resultado").style.display = "flex";
+          document.getElementById("error").style.display = "none";
+          RESULTADO = RESULTADO * selectedGanancia;
+          RESULTADO = RESULTADO.toFixed(2);
+          //selTipoVidSel
+          document.getElementById("resultado").lastChild.innerHTML = "Precio por " + MATERIAL_SELECCIONADO + " de " + VALUE_BASE + "x"+ VALUE_ALTURA + "mts. (Tipo de terminado: " + TERMINADO_SELECCIONADO + ", Varilla: " + VARILLA_SELECCIONADO + ", Paspartú: " + PASPARTU_SELECCIONADO + "): <div class='resultado'>$"+RESULTADO+"</div>";
+          //window.presupuesto = "Precio por " + MATERIAL_SELECCIONADO +" de "+VALUE_BASE + "x"+ VALUE_ALTURA + "mts. (Tipo de terminado: " + TERMINADO_SELECCIONADO + ", Varilla: " + VARILLA_SELECCIONADO +", Paspartú: "+ PASPARTU_SELECCIONADO + "): $"+RESULTADO;
+          
+          document.getElementById("enviarWABox").style.display = "flex";
+          
+        }
+      }
 
-    if( selectedGanancia === '' || selectedGanancia === window.empty1 || selectedGanancia === window.empty2 ){
-      document.getElementById("error").style.display = "flex";
-      document.getElementById("enviarWABox").style.display = "none";
-      document.getElementById("message").innerHTML += "Seleccione un porcentaje de GANANCIA.<br>";
-      //gananciaOK = false;
     }else{
       document.getElementById("error").style.display = "flex";
-      if(RESULTADO > 0) {
-        document.getElementById("resultado").style.display = "flex";
-        document.getElementById("error").style.display = "none";
-        RESULTADO = RESULTADO * selectedGanancia;
-        RESULTADO = RESULTADO.toFixed(2);
-        //selTipoVidSel
-        document.getElementById("resultado").lastChild.innerHTML = "Precio por " + MATERIAL_SELECCIONADO +" de "+VALUE_BASE + "x"+ VALUE_ALTURA + "mts. (Tipo de terminado: " + TERMINADO_SELECCIONADO + ", Varilla: " + VARILLA_SELECCIONADO +", Paspartú: "+ PASPARTU_SELECCIONADO + "): " + "<div class='resultado'>$"+RESULTADO+"</div>";
-        //document.getElementById("resultado").lastChild.innerHTML = "Precio por " + MATERIAL_SELECCIONADO +" de "+VALUE_BASE + "x"+ VALUE_ALTURA + "mts. (Tipo de terminado: " + TERMINADO_SELECCIONADO + ", Varilla: " + VARILLA_SELECCIONADO +", Paspartú: "+ PASPARTU_SELECCIONADO + "): " + "<div class='resultado'>$"+RESULTADO+"</div>";
-        window.presupuesto = "Precio por " + MATERIAL_SELECCIONADO +" de "+VALUE_BASE + "x"+ VALUE_ALTURA + "mts. (Tipo de terminado: " + TERMINADO_SELECCIONADO + ", Varilla: " + VARILLA_SELECCIONADO +", Paspartú: "+ PASPARTU_SELECCIONADO + "): $"+RESULTADO;
-        
-        document.getElementById("enviarWABox").style.display = "flex";
+      document.getElementById("resultado").style.display = "none";
+      document.getElementById("enviarWABox").style.display = "none";
 
-        window.encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
-        window.encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
-        window.encodeMsg2 = encodeURIComponent("✅ " + window.presupuesto);
-        window.mensajeAEnviar = window.encodeMsg0+"%0a"+window.encodeMsg1+"%0a%0a"+window.encodeMsg2+"%0a";
-        
-      }
     }
+
+
+    
   
 
   }

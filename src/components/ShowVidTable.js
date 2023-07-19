@@ -172,17 +172,16 @@ const ShowVidTable = () => {
   };
 
   const [phone, setPhone] = React.useState('');
+
+  window.formatPhoneNumber = "";
+
   const handleChange = (newPhone) => {
         setPhone(newPhone);
 
-        let formatPhoneNumber = newPhone.replaceAll(/\s/g,'');
+        window.formatPhoneNumber = newPhone.replaceAll(/\s/g,'');
         //console.log(formatPhoneNumber)
 
-        window.encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
-        window.encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
-        window.encodeMsg2 = encodeURIComponent("✅ " + window.presupuesto);
-        window.mensajeAEnviar = window.encodeMsg0+"%0a"+window.encodeMsg1+"%0a%0a"+window.encodeMsg2+"%0a";
-        window.mensajeWA = "https://api.whatsapp.com/send?phone="+formatPhoneNumber+"&text="+window.mensajeAEnviar;
+        
   }
 
   return (
@@ -442,11 +441,11 @@ const ShowVidTable = () => {
           </Item>
         </Box>
 
-        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', }}>
+        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)' }}>
           <Button onClick={ () => calcularPrecio( selectedOption, selectTerminado, selectedPorcTerminado, selectedDespVidrio, VarillaisChecked, PaspartuisChecked, selectedDespVarilla, selectedDespPaspartu, selectedGanancia ) } sx={{ m: 1, p:1 }} variant="contained">Calcular precio</Button>
         </Box>
 
-        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', }}>
+        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)' }}>
           <Item>
             <Alert id='error' severity="error">
               <div id='message'></div>
@@ -461,14 +460,28 @@ const ShowVidTable = () => {
           </Item>
         </Box>
 
-        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', }}>
+        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)' }}>
           <Item>            
             <Fragment>
               <Stack id="enviarWABox" direction="column" spacing={1}>
                   <Item>
-                      {/* <MuiTelInput value={phone} onChange={handleChange} defaultCountry={'AR'} /> */}
-                      <MuiTelInput value={phone} onChange={handleChange} defaultCountry={'AR'} />
-                      <Button id="enviarWA" target="_blank" href={window.mensajeWA} sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary">
+                      <MuiTelInput id="phoneValue" value={phone} onChange={handleChange} defaultCountry={'AR'} />
+                      <Button id="enviarWA" target="_blank" onClick={() => {
+                          window.encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
+                          window.encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
+
+                          window.presupuestoDetalle = document.getElementsByClassName("MuiAlert-message css-1pxa9xg-MuiAlert-message")[1].innerText;
+                          window.formatPhoneNumber = document.getElementById("phoneValue").value;
+                          window.presupuesto = document.getElementsByClassName("resultado")[0].innerText;
+
+                          window.encodeMsg2 = encodeURIComponent("✅ " + window.presupuestoDetalle);
+
+                          window.mensajeAEnviar = window.encodeMsg0+"%0a"+window.encodeMsg1+"%0a%0a"+window.encodeMsg2+"%0a";
+
+                          alert('Revise bien los datos antes de enviar por WhatsApp');
+                          window.open("https://api.whatsapp.com/send?phone="+window.formatPhoneNumber+"&text="+window.mensajeAEnviar, '_blank');
+
+                        }} href="#" sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary">
                           <WhatsAppIcon sx={{ color: '#FFFFFF' }}/>
                           <Typography variant="p" sx={{ pl:2, color: '#FFFFFF'}}>Enviar por WhatsApp</Typography>
                       </Button>

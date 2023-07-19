@@ -37,8 +37,8 @@ input#desperdicio, input#ganancia {
 }
 
 #error, #resultado {
-    /* display: none;
-    width: -webkit-fill-available; */
+    display: none;
+    width: -webkit-fill-available;
 }
 
 #error-cuadro-vidrio,

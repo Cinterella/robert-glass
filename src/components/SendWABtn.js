@@ -27,15 +27,15 @@ function SendWABtn () {
         let formatPhoneNumber = newPhone.replaceAll(/\s/g,'');
         //console.log(formatPhoneNumber)
         
-        //window.mensajeWA = "https://api.whatsapp.com/send?phone="+formatPhoneNumber+"&text="+window.mensajeAEnviar;
-
+        
         
     }
-
+    
     const mensajeWA = () => {
         alert('Hello!');
         console.log("asdasd")
         //window.location.href="pagelink"
+        //window.mensajeWA = "https://api.whatsapp.com/send?phone="+formatPhoneNumber+"&text="+window.mensajeAEnviar;
 
     }
 
@@ -58,7 +58,9 @@ function SendWABtn () {
                     {/* <MuiTelInput value={phone} onChange={handleChange} defaultCountry={'AR'} /> */}
                     <MuiTelInput value={phone} onChange={handleChange} defaultCountry={'AR'} />
                     {/* <Button id="enviarWA" target="_blank" onClick={this.sayHello} href={window.mensajeWA} sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary"> */}
-                    <Button id="enviarWA" target="_blank" onClick={mensajeWA} sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary">
+                    <Button id="enviarWA" target="_blank" onClick={() => {
+                            alert('clicked');
+                        }} sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary">
                         <WhatsAppIcon sx={{ color: '#FFFFFF' }}/>
                         <Typography variant="p" sx={{ pl:2, color: '#FFFFFF'}}>Enviar por WhatsApp</Typography>
                     </Button>
