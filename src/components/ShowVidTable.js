@@ -467,7 +467,7 @@ const ShowVidTable = () => {
                           const encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
                           const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
 
-                          const presupuestoDetalle = document.getElementsByClassName("MuiAlert-message css-1pxa9xg-MuiAlert-message")[1].innerText;
+                          const presupuestoDetalle = document.getElementsByClassName("MuiAlert-message")[1].innerText;
                           const formatPhoneNumber = document.getElementById("phoneValue").value;
                           const encodeMsg2 = encodeURIComponent("✅ " + presupuestoDetalle);
                           const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a%0a${encodeMsg2}%0a`;
