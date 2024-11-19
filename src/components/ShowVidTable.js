@@ -29,7 +29,7 @@ import Typography from '@mui/material/Typography';
 //import Button from '@mui/material/Button';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 //import calcularPrecio from '../functions/calcularPrecio';
-import { MuiTelInput } from 'mui-tel-input';
+//import { MuiTelInput } from 'mui-tel-input';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
@@ -171,18 +171,7 @@ const ShowVidTable = () => {
     setIsCheckedPaspartu(event.target.checked);
   };
 
-  const [phone, setPhone] = React.useState('');
-
   window.formatPhoneNumber = "";
-
-  const handleChange = (newPhone) => {
-        setPhone(newPhone);
-
-        window.formatPhoneNumber = newPhone.replaceAll(/\s/g,'');
-        //console.log(formatPhoneNumber)
-
-        
-  }
 
   return (
     <Fragment>
@@ -465,30 +454,28 @@ const ShowVidTable = () => {
             <Fragment>
               <Stack id="enviarWABox" direction="column" spacing={1}>
                   <Item>
-                      <MuiTelInput id="phoneValue" value={phone} onChange={handleChange} defaultCountry={'AR'} />
+                      <input 
+                        id="phoneValue" 
+                        type="tel" 
+                        placeholder="Ingrese teléfono celular. EJ: 1143214321" 
+                        style={{
+                          width: "80%", maxWidth: "700px", minWidth: "300px", padding: "15px", 
+                          margin: "0 10px 0 0", border: "1px solid #ccc", borderRadius: "4px", fontSize: "0.875rem"
+                        }}
+                      />
                       <Button id="enviarWA" target="_blank" onClick={() => {
-                          window.encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
-                          window.encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
+                          const encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
+                          const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
 
-                          window.presupuestoDetalle = document.getElementsByClassName("MuiAlert-message css-1pxa9xg-MuiAlert-message")[1].innerText;
-                          window.formatPhoneNumber = document.getElementById("phoneValue").value;
-                          window.formatPhoneNumber = window.formatPhoneNumber.replace("+54", "");
-                          window.formatPhoneNumber = window.formatPhoneNumber.replace(/\s+/g, "");
+                          const presupuestoDetalle = document.getElementsByClassName("MuiAlert-message css-1pxa9xg-MuiAlert-message")[1].innerText;
+                          const formatPhoneNumber = document.getElementById("phoneValue").value;
+                          const encodeMsg2 = encodeURIComponent("✅ " + presupuestoDetalle);
+                          const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a%0a${encodeMsg2}%0a`;
 
+                          alert(`${formatPhoneNumber}`);
+                          window.open(`https://api.whatsapp.com/send?phone=${formatPhoneNumber}&text=${mensajeAEnviar}`);
 
-
-                          window.presupuesto = document.getElementsByClassName("resultado")[0].innerText;
-
-                          window.encodeMsg2 = encodeURIComponent("✅ " + window.presupuestoDetalle);
-
-                          window.mensajeAEnviar = window.encodeMsg0+"%0a"+window.encodeMsg1+"%0a%0a"+window.encodeMsg2+"%0a";
-
-                          alert(`${window.formatPhoneNumber}`);
-                          alert('Revise bien los datos antes de enviar por WhatsApp');
-                          //window.open("https://api.whatsapp.com/send?phone="+window.formatPhoneNumber+"&text="+window.mensajeAEnviar, '_blank');
-                          window.open(`https://wa.me/${window.formatPhoneNumber}?text=${window.mensajeAEnviar}`, '_blank');
-
-                        }} href="#" sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary">
+                        }} sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary">
                         <WhatsAppIcon sx={{ color: '#FFFFFF' }}/>
                         <Typography variant="p" sx={{ pl:2, color: '#FFFFFF'}}>Enviar por WhatsApp</Typography>
                       </Button>

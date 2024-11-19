@@ -80,6 +80,10 @@ button {
 
 #enviarWABox {
     display: none;
+
+    div{
+        padding: 0;
+    }
 }
 
 .css-hswe6l-MuiButtonBase-root-MuiButton-root:hover, .css-byfwie:hover {
