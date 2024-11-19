@@ -38,7 +38,7 @@ input#desperdicio, input#ganancia {
 
 #error, #resultado {
     display: none;
-    width: -webkit-fill-available;
+    width: auto;
 }
 
 #error-cuadro-vidrio,
@@ -46,7 +46,7 @@ input#desperdicio, input#ganancia {
 #error-cuadro-paspartu,
 #resultado-cuadro {
     display: none;
-    width: -webkit-fill-available;
+    width: 100%;
 }
 
 .logoBox {
@@ -78,8 +78,7 @@ button {
     font-weight: bold;
 }
 
-#enviarWABox {
-    display: none;
+.enviarWABox {
 
     div{
         padding: 0;

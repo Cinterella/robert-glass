@@ -137,8 +137,8 @@ const ShowVidTable = () => {
   const handleSelectTerminado = (event) => {
     setSelectedTerminado(event.target.value);
     //let optionSelectedValue = event.target.value;
-        //optionSelectedValue = optionSelectedValue.split('-');
-        //document.getElementById('tipoPaspartu').innerText = optionSelectedValue[2];
+    //optionSelectedValue = optionSelectedValue.split('-');
+    //document.getElementById('tipoPaspartu').innerText = optionSelectedValue[2];
   };
 
   const handleSelectedPorcTerminadoChange = (event) => {
@@ -176,7 +176,7 @@ const ShowVidTable = () => {
   return (
     <Fragment>
 
-      <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', backgroundColor: '#fff', borderRadius: 2, p:2 }}>
+      <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', backgroundColor: '#fff', borderRadius: 2, p:2, margin: 'auto', width: 'fit-content' }}>
         
         <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(3, 1fr)' }}>
           <Item>
@@ -403,19 +403,19 @@ const ShowVidTable = () => {
                     <MenuItem key={80} value={1.8}>80%</MenuItem>
                     <MenuItem key={90} value={1.9}>90%</MenuItem>
                     <MenuItem key={100} value={2}>100%</MenuItem>
-                    <MenuItem key={120} value={2.12}>120%</MenuItem>
-                    <MenuItem key={140} value={2.14}>140%</MenuItem>
-                    <MenuItem key={160} value={2.16}>160%</MenuItem>
-                    <MenuItem key={200} value={3.20}>200%</MenuItem>
-                    <MenuItem key={220} value={3.22}>220%</MenuItem>
-                    <MenuItem key={240} value={3.24}>240%</MenuItem>
-                    <MenuItem key={280} value={3.28}>280%</MenuItem>
-                    <MenuItem key={300} value={4.30}>300%</MenuItem>
-                    <MenuItem key={320} value={4.32}>320%</MenuItem>
-                    <MenuItem key={340} value={4.34}>340%</MenuItem>
-                    <MenuItem key={360} value={4.36}>360%</MenuItem>
-                    <MenuItem key={380} value={4.38}>380%</MenuItem>
-                    <MenuItem key={400} value={5.40}>400%</MenuItem>
+                    <MenuItem key={120} value={2.2}>120%</MenuItem>
+                    <MenuItem key={140} value={2.4}>140%</MenuItem>
+                    <MenuItem key={160} value={2.6}>160%</MenuItem>
+                    <MenuItem key={200} value={3}>200%</MenuItem>
+                    <MenuItem key={220} value={3.2}>220%</MenuItem>
+                    <MenuItem key={240} value={3.4}>240%</MenuItem>
+                    <MenuItem key={280} value={3.8}>280%</MenuItem>
+                    <MenuItem key={300} value={4.0}>300%</MenuItem>
+                    <MenuItem key={320} value={4.2}>320%</MenuItem>
+                    <MenuItem key={340} value={4.4}>340%</MenuItem>
+                    <MenuItem key={360} value={4.6}>360%</MenuItem>
+                    <MenuItem key={380} value={4.8}>380%</MenuItem>
+                    <MenuItem key={400} value={5}>400%</MenuItem>
                 </Select>
               </FormControl>              
             </Item>
@@ -431,7 +431,7 @@ const ShowVidTable = () => {
         </Box>
 
         <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)' }}>
-          <Button onClick={ () => calcularPrecio( selectedOption, selectTerminado, selectedPorcTerminado, selectedDespVidrio, VarillaisChecked, PaspartuisChecked, selectedDespVarilla, selectedDespPaspartu, selectedGanancia ) } sx={{ m: 1, p:1 }} variant="contained">Calcular precio</Button>
+          <Button onClick={ () => calcularPrecio( selectedOption, selectTerminado, selectedPorcTerminado, selectedDespVidrio, VarillaisChecked, PaspartuisChecked, selectedDespVarilla, selectedDespPaspartu, selectedGanancia ) } sx={{ m: 1, p:3 }} variant="contained">Calcular precio</Button>
         </Box>
 
         <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)' }}>
@@ -445,43 +445,39 @@ const ShowVidTable = () => {
           </Item>
 
           <Item>
-            <Alert size="lg" id='resultado' variant="outlined" severity="success" sx={{ m: 0 }}></Alert>
+            <Alert size="lg" id='resultado' variant="outlined" severity="success" sx={{ m: 0, width: 'auto' }}></Alert>
           </Item>
         </Box>
 
-        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)' }}>
+        <Box id="enviarWABox" sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)' }}>
+          <Item>    
+            <input 
+              id="phoneValue" 
+              type="tel" 
+              placeholder="Ejemplo: 1143214321" 
+              style={{
+                width: "-webkit-fill-available", padding: "20px 15px", 
+                margin: "0", border: "1px solid #ccc", borderRadius: "4px", fontSize: "0.875rem"
+              }}
+            />
+          </Item>
           <Item>            
-            <Fragment>
-              <Stack id="enviarWABox" direction="column" spacing={1}>
-                  <Item>
-                      <input 
-                        id="phoneValue" 
-                        type="tel" 
-                        placeholder="Ingrese teléfono celular. EJ: 1143214321" 
-                        style={{
-                          width: "80%", maxWidth: "700px", minWidth: "300px", padding: "15px", 
-                          margin: "0 10px 0 0", border: "1px solid #ccc", borderRadius: "4px", fontSize: "0.875rem"
-                        }}
-                      />
-                      <Button id="enviarWA" target="_blank" onClick={() => {
-                          const encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
-                          const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
+            <Button id="enviarWA" target="_blank" onClick={() => {
+                const encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
+                const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
 
-                          const presupuestoDetalle = document.getElementsByClassName("MuiAlert-message")[1].innerText;
-                          const formatPhoneNumber = document.getElementById("phoneValue").value;
-                          const encodeMsg2 = encodeURIComponent("✅ " + presupuestoDetalle);
-                          const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a%0a${encodeMsg2}%0a`;
+                const presupuestoDetalle = document.getElementsByClassName("MuiAlert-message")[1].innerText;
+                const formatPhoneNumber = document.getElementById("phoneValue").value;
+                const encodeMsg2 = encodeURIComponent("✅ " + presupuestoDetalle);
+                const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a%0a${encodeMsg2}%0a`;
 
-                          alert(`${formatPhoneNumber}`);
-                          window.open(`https://api.whatsapp.com/send?phone=54${formatPhoneNumber}&text=${mensajeAEnviar}`);
+                //alert(`${formatPhoneNumber}`);
+                window.open(`https://api.whatsapp.com/send?phone=54${formatPhoneNumber}&text=${mensajeAEnviar}`);
 
-                        }} sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary">
-                        <WhatsAppIcon sx={{ color: '#FFFFFF' }}/>
-                        <Typography variant="p" sx={{ pl:2, color: '#FFFFFF'}}>Enviar por WhatsApp</Typography>
-                      </Button>
-                  </Item>
-              </Stack>
-            </Fragment>
+              }} sx={{ m: 0, p:1.5, backgroundColor: "#008069", width: '100%' }} variant="contained" color="secondary">
+              <WhatsAppIcon sx={{ color: '#FFFFFF' }}/>
+              <Typography variant="p" sx={{ pl:2, color: '#FFFFFF'}}>Enviar por WhatsApp</Typography>
+            </Button>
           </Item>
         </Box>
 

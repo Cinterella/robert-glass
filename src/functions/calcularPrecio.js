@@ -136,13 +136,14 @@ export function calcularPrecio( selectedOption, selectTerminado, selectedPorcTer
     if( varillaOK && paspartuOK ){
       if( selectedGanancia === '' || selectedGanancia === window.empty1 || selectedGanancia === window.empty2 ){
         document.getElementById("error").style.display = "flex";
-        document.getElementById("enviarWABox").style.display = "none";
+        //document.getElementById("enviarWABox").style.display = "none";
         document.getElementById("message").innerHTML += "Seleccione un porcentaje de GANANCIA.<br>";
         //gananciaOK = false;
       }else{
         document.getElementById("error").style.display = "flex";
         if(RESULTADO > 0) {
-          document.getElementById("resultado").style.display = "flex";
+          document.getElementById("resultado").style.display = "inherit";
+          document.getElementById("resultado").style.flexDirection = "column";
           document.getElementById("error").style.display = "none";
           RESULTADO = RESULTADO * selectedGanancia;
           RESULTADO = RESULTADO.toFixed(2);
@@ -150,7 +151,7 @@ export function calcularPrecio( selectedOption, selectTerminado, selectedPorcTer
           document.getElementById("resultado").lastChild.innerHTML = "Precio por " + MATERIAL_SELECCIONADO + " de " + VALUE_BASE + "x"+ VALUE_ALTURA + "mts. (Tipo de terminado: " + TERMINADO_SELECCIONADO + ", Varilla: " + VARILLA_SELECCIONADO + ", Paspartú: " + PASPARTU_SELECCIONADO + "): <div class='resultado'>$"+RESULTADO+"</div>";
           //window.presupuesto = "Precio por " + MATERIAL_SELECCIONADO +" de "+VALUE_BASE + "x"+ VALUE_ALTURA + "mts. (Tipo de terminado: " + TERMINADO_SELECCIONADO + ", Varilla: " + VARILLA_SELECCIONADO +", Paspartú: "+ PASPARTU_SELECCIONADO + "): $"+RESULTADO;
           
-          document.getElementById("enviarWABox").style.display = "flex";
+          //document.getElementById("enviarWABox").style.display = "flex";
           
         }
       }
@@ -158,7 +159,7 @@ export function calcularPrecio( selectedOption, selectTerminado, selectedPorcTer
     }else{
       document.getElementById("error").style.display = "flex";
       document.getElementById("resultado").style.display = "none";
-      document.getElementById("enviarWABox").style.display = "none";
+      //document.getElementById("enviarWABox").style.display = "none";
 
     }
 
