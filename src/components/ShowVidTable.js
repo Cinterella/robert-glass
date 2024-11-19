@@ -473,7 +473,7 @@ const ShowVidTable = () => {
                           const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a%0a${encodeMsg2}%0a`;
 
                           alert(`${formatPhoneNumber}`);
-                          window.open(`https://api.whatsapp.com/send?phone=${formatPhoneNumber}&text=${mensajeAEnviar}`);
+                          window.open(`https://api.whatsapp.com/send?phone=54${formatPhoneNumber}&text=${mensajeAEnviar}`);
 
                         }} sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary">
                         <WhatsAppIcon sx={{ color: '#FFFFFF' }}/>
