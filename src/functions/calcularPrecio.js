@@ -10,12 +10,12 @@ export function calcularPrecio( selectedOption, selectTerminado, selectedPorcTer
   let terminadoOK = false;
   let terminadoPorcOK = false;
   let terminadoPorcDespOK = false;
-  let vidrioOK = false;
-  let vidrioPorcOK = false;
-  let vidrioDespOK = false;
+  //let vidrioOK = false;
+  //let vidrioPorcOK = false;
+  //let vidrioDespOK = false;
   let varillaOK = false;
   let paspartuOK = false;
-  let gananciaOK = false;
+  //let gananciaOK = false;
 
   let mensajeVARILLA = "";
   let mensajePASPARTU = "";

@@ -472,18 +472,25 @@ const ShowVidTable = () => {
 
                           window.presupuestoDetalle = document.getElementsByClassName("MuiAlert-message css-1pxa9xg-MuiAlert-message")[1].innerText;
                           window.formatPhoneNumber = document.getElementById("phoneValue").value;
+                          window.formatPhoneNumber = window.formatPhoneNumber.replace("+54", "");
+                          window.formatPhoneNumber = window.formatPhoneNumber.replace(/\s+/g, "");
+
+
+
                           window.presupuesto = document.getElementsByClassName("resultado")[0].innerText;
 
                           window.encodeMsg2 = encodeURIComponent("✅ " + window.presupuestoDetalle);
 
                           window.mensajeAEnviar = window.encodeMsg0+"%0a"+window.encodeMsg1+"%0a%0a"+window.encodeMsg2+"%0a";
 
+                          alert(`${window.formatPhoneNumber}`);
                           alert('Revise bien los datos antes de enviar por WhatsApp');
-                          window.open("https://api.whatsapp.com/send?phone="+window.formatPhoneNumber+"&text="+window.mensajeAEnviar, '_blank');
+                          //window.open("https://api.whatsapp.com/send?phone="+window.formatPhoneNumber+"&text="+window.mensajeAEnviar, '_blank');
+                          window.open(`https://wa.me/${window.formatPhoneNumber}?text=${window.mensajeAEnviar}`, '_blank');
 
                         }} href="#" sx={{ m: 0, p:1.5, backgroundColor: "#008069" }} variant="contained" color="secondary">
-                          <WhatsAppIcon sx={{ color: '#FFFFFF' }}/>
-                          <Typography variant="p" sx={{ pl:2, color: '#FFFFFF'}}>Enviar por WhatsApp</Typography>
+                        <WhatsAppIcon sx={{ color: '#FFFFFF' }}/>
+                        <Typography variant="p" sx={{ pl:2, color: '#FFFFFF'}}>Enviar por WhatsApp</Typography>
                       </Button>
                   </Item>
               </Stack>

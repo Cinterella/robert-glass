@@ -3,7 +3,7 @@ import {Fragment , useState} from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import calcularPrecio from '../functions/calcularPrecio';
+//import calcularPrecio from '../functions/calcularPrecio';
 import { MuiTelInput } from 'mui-tel-input';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
