@@ -1,16 +1,15 @@
 module.exports = global.config = {
     credentials: {
-        apiKey: "AIzaSyDOiY3PhAPrG00y5QCRtdRfFLjbMUZW2ic",
-        spreadsheetId: "1DXwF8K0KhdUe6tDM8ZzIHkS_CUcdP-Lomj5eTIw_oxE",
+        spreadsheetId : process.env.SPREADSHEET_ID,
+        apiKey : process.env.GOOGLE_API_KEY,
         ranges: {
-            total: "lista!A2:P200",
-            vidrios: "lista!A2:C24",
-            terminado: "lista!A2:E5",
+            total: "lista!A2:P150",
+            vidrios: "lista!A2:G24",
+            terminado: "lista!E2:F5",
             porcTerminado: "lista!A2:E12",
-            varillas: "lista!A2:G91",
-            paspartu: "lista!A2:I17"
+            varillas: "lista!G2:I30",
+            paspartu: "lista!J2:L17"
         }
-        
     },
     alerts: {
         getGlassPriceAlert: false
@@ -26,11 +25,4 @@ module.exports = global.config = {
         bkg2: "#d6e8bc",
         bkg3: "#eeeeee"
     }
-
-    //const APIKEY = "AIzaSyDOiY3PhAPrG00y5QCRtdRfFLjbMUZW2ic";
-    //const SPREADSHEET_ID = "1DXwF8K0KhdUe6tDM8ZzIHkS_CUcdP-Lomj5eTIw_oxE";
-    //const RANGE = "vidrieria!A2:B40";
-    //const RANGE = "vidrieria!C2:D10";
-
-
 };

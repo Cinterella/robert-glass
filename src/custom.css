@@ -1,5 +1,6 @@
 :root {
     --blue: #2468ad;
+    --green: #08875b;
     --lightGrey: #e6e6e6;
     --grey: #373737;
     --black: #000000;
@@ -22,10 +23,6 @@
     }
 }
 
-* {
-    /* color: var(--black);  */
-}
-
 body {
     height: 100vh;
     background-color: var(--lightGrey);
@@ -36,9 +33,41 @@ input#desperdicio, input#ganancia {
     padding-left: 10em;
 }
 
+#errorContainer, #resultadoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 #error, #resultado {
-    display: none;
     width: auto;
+    display: grid;
+    margin: 0;
+    font-size: 20px;
+}
+
+#error {
+    color: red;
+}
+
+#resultado {
+    color: green;
+}
+
+#resultado p{
+    font-weight: bold;
+    font-size: 15px;
+    margin: 5px 0 0 0;
+    padding: 0;
+    color: green;
+}
+
+#error p{
+    font-weight: bold;
+    font-size: 15px;
+    margin: 5px 0 0 0;
+    padding: 0;
+    color: red;
 }
 
 #error-cuadro-vidrio,
@@ -78,6 +107,13 @@ button {
     font-weight: bold;
 }
 
+.highlight-secondary {
+    color: var(--green);
+    font-size:var(--fontSizeSmall);
+    padding: 5px;
+    font-weight: bold;
+}
+
 .enviarWABox {
 
     div{
@@ -87,4 +123,9 @@ button {
 
 .css-hswe6l-MuiButtonBase-root-MuiButton-root:hover, .css-byfwie:hover {
     background-color: #1565c0 !important;
+}
+
+#phoneValue {
+    padding: 15px !important;
+    font-size: 22px !important;
 }

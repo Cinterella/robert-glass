@@ -33,7 +33,6 @@ function SendWABtn () {
     
     const mensajeWA = () => {
         alert('Hello!');
-        console.log("asdasd")
         //window.location.href="pagelink"
         //window.mensajeWA = "https://api.whatsapp.com/send?phone="+formatPhoneNumber+"&text="+window.mensajeAEnviar;
 
