@@ -240,11 +240,12 @@ const ShowFrameTable = () => {
       return;
     }
     const encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
-    const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
+    const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA). Horario de atención: Lunes a Viernes: 10 a 13hs y 15 a 19hs. Sábados: 10 a 13hs.");
     const presupuestoDetalle = document.getElementsByClassName("MuiAlert-message")[1]?.innerText || '';
-    const encodeMsg2 = encodeURIComponent("💲*Presupuesto:* ");
-    const encodeMsg3 = encodeURIComponent(presupuestoDetalle);
-    const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a${encodeMsg2}%0a${encodeMsg3}%0a`;
+    const encodeMsg2 = encodeURIComponent("📱 1157690193");
+    const encodeMsg3 = encodeURIComponent("💲*Presupuesto:* ");
+    const encodeMsg4 = encodeURIComponent(presupuestoDetalle);
+    const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a${encodeMsg2}%0a%0a${encodeMsg3}%0a${encodeMsg4}%0a`;
 
     const formattedPhoneNumber = `54${phoneNumber}`;
     const whatsappURL = `https://api.whatsapp.com/send?phone=${formattedPhoneNumber}&text=${mensajeAEnviar}`;
