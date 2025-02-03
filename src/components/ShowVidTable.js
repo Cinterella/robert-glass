@@ -77,7 +77,7 @@ const ShowVidTable = () => {
     //var varillaPrecioGananciaInput = "";
     //var paspartuPrecioGananciaInput = "";
     //var desperdicioPaspartuInput = "";
-    //var terminadoSelectInput = "";
+    var terminadoSelectInput = "";
     var porcentajeTerminadoInput = "";
 
     function getNextSiblingInputValue(currentDivId) {
@@ -105,38 +105,16 @@ const ShowVidTable = () => {
     desperdicioVidrioInput = getNextSiblingInputValue("desperdicio-vidrio");
     baseInput = document.getElementById("base").value;
     alturaInput = document.getElementById("altura").value;
-    //varillaSelectInput = document.getElementById("tipo-varilla-select").innerText;
-    //varillaPrecioGananciaInput = document.getElementById("varilla-precio-ganancia").innerText;
-    //paspartuSelectInput = document.getElementById("tipo-paspartu-select").innerText;
-    //paspartuPrecioGananciaInput = document.getElementById("paspartu-precio-ganancia").innerText;
-    //desperdicioPaspartuInput = getNextSiblingInputValue("desperdicio-paspartu");
-    //terminadoSelectInput = document.getElementById("terminado-select").innerText;
     porcentajeTerminadoInput = getNextSiblingInputValue("porcentaje-terminado");
-    
-    /* console.log("--------------------------") 
-    console.log("vidrioSelectInput: "+vidrioSelectInput)
-    console.log("vidrioPrecioGananciaInput: "+vidrioPrecioGananciaInput)
-    console.log("desperdicioVidrioInput: "+desperdicioVidrioInput)
-    console.log("baseInput: "+baseInput)
-    console.log("alturaInput: "+alturaInput)
-    console.log("varillaSelectInput: "+varillaSelectInput) 
-    console.log("varillaPrecioGananciaInput: "+varillaPrecioGananciaInput) 
-    console.log("paspartuSelectInput: "+paspartuSelectInput) 
-    console.log("paspartuPrecioGananciaInput: "+paspartuPrecioGananciaInput) 
-    console.log("desperdicioPaspartuInput: "+desperdicioPaspartuInput) 
-    console.log("terminadoSelectInput: "+terminadoSelectInput)
-    console.log("porcentajeTerminadoInput: "+porcentajeTerminadoInput)
-    console.log("--------------------------")  */
+    terminadoSelectInput = document.getElementById("terminado-select").innerText;
 
     var msgErrorVidrio = "";
     var msgErrorBase = "";
     var msgErrorAltura = "";
-    var msgErrorTerminado = "";
 
     resultadoDiv.innerText = "";
     errorDiv.innerText = "";
     
-
     if (getNextSiblingInputValue("tipo-vidrio-select") === null){
       msgErrorVidrio = "Seleccione el TIPO DE VIDRIO. ";
       errorDiv.innerHTML += msgErrorVidrio;
@@ -149,42 +127,25 @@ const ShowVidTable = () => {
       msgErrorAltura = "Ingrese ALTURA mayor a 0 cm. ";
       errorDiv.innerHTML += msgErrorAltura;
     }
-    if (getNextSiblingInputValue("terminado-select") === null){
-      msgErrorTerminado = "Seleccione el TIPO DE TERMINADO. ";
-      errorDiv.innerHTML += msgErrorTerminado;
-    }
-    /* if (getNextSiblingInputValue("tipo-varilla-select") !== null){
-      varillaPrecioGananciaInput = Number(varillaPrecioGananciaInput)
-      //console.log(varillaPrecioGananciaInput)
-    }
-    if(getNextSiblingInputValue("tipo-paspartu-select") !== null){
-      paspartuPrecioGananciaInput = Number(paspartuPrecioGananciaInput)
-      //console.log(paspartuPrecioGananciaInput)
-    }
-    if (getNextSiblingInputValue("porcentaje-terminado") !== null){
-      desperdicioPaspartuInput = Number(desperdicioPaspartuInput)
-      //console.log(desperdicioPaspartuInput)
-    } */
-    //console.log("*************************************************")
 
-    if ( msgErrorVidrio === "" && msgErrorBase === "" && msgErrorAltura === "" && msgErrorTerminado === "" ){
+    if ( msgErrorVidrio === "" && msgErrorBase === "" && msgErrorAltura === "" ){
       let baseEnMetros = Number(baseInput) / 100;
       let alturaEnMetros = Number(alturaInput) / 100;
-      //let perimetroEnMetros = 2 * ( Number(baseEnMetros) +  Number(alturaEnMetros) );
       let superficieEnMetros = ( Number(baseEnMetros) *  Number(alturaEnMetros) ); 
 
       let precioVidrio = (superficieEnMetros * Number(vidrioPrecioGananciaInput) ) * Number(desperdicioVidrioInput);
-      //let terminado = document.getElementById("terminado-select").innerText;
       let precioTerminado = Number(porcentajeTerminadoInput);
       let precioFinal = Math.round( ( precioVidrio ) * precioTerminado );
-      //console.log("precioVidrio: "+precioVidrio)
-      //console.log("precioVarilla: "+precioVarilla)
-      //console.log("precioPaspartu: "+precioPaspartu)
-      //console.log("terminado: "+terminado)
-      //console.log("precioTerminado: "+precioTerminado)
 
       msgOK = "Precio por '"+vidrioSelectInput+"' de "+ baseInput+"cm x "+alturaInput+"cm. ";
-      
+
+      //TERMINADO
+      if( terminadoSelectInput === "Cortado" || terminadoSelectInput === "Pulido" || terminadoSelectInput === "Colocado" ) {
+        msgOK += "Terminado: '"+terminadoSelectInput+"'. ";
+      }else{
+        msgOK += "Terminado: N/A. ";
+      }
+
       msgOK += "Total: $"+precioFinal+".";
       resultadoDiv.innerHTML += msgOK;
     }
@@ -193,16 +154,19 @@ const ShowVidTable = () => {
   const handleSendToWhatsApp = () => {
     const phoneNumber = document.getElementById("phoneValue").value;
     if (!phoneNumber) {
-      alert("Please enter a phone number.");
+      alert("Ingrese un número de teléfono.");
       return;
     }
     const encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
-    const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA)");
+    const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA). Horario de atención: Lunes a Viernes: 10 a 13hs y 15 a 19hs. Sábados: 10 a 13hs. https://maps.app.goo.gl/7cw7xh1KLGmFYicf9");
     const presupuestoDetalle = document.getElementsByClassName("MuiAlert-message")[1]?.innerText || '';
-    const encodeMsg2 = encodeURIComponent("💲*Presupuesto:* ");
-    const encodeMsg3 = encodeURIComponent(presupuestoDetalle);
-    const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a${encodeMsg2}%0a${encodeMsg3}%0a`;
-
+    const encodeMsg2 = encodeURIComponent("📱 1157690193");
+    const encodeMsg3 = encodeURIComponent("💲*Presupuesto:* ");
+    const encodeMsg4 = encodeURIComponent(presupuestoDetalle);
+    const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a${encodeMsg2}%0a%0a${encodeMsg3}%0a${encodeMsg4}%0a`;
+    // AGREGAR FOTO 
+    // AGREGAR ENLACE GOOGLE
+    // https://maps.app.goo.gl/7cw7xh1KLGmFYicf9
     const formattedPhoneNumber = `54${phoneNumber}`;
     const whatsappURL = `https://api.whatsapp.com/send?phone=${formattedPhoneNumber}&text=${mensajeAEnviar}`;
 

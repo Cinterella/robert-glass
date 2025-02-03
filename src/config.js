@@ -3,7 +3,7 @@ module.exports = global.config = {
         spreadsheetId : process.env.SPREADSHEET_ID,
         apiKey : process.env.GOOGLE_API_KEY,
         ranges: {
-            total: "lista!A2:P150",
+            total: "lista!A2:P100",
             vidrios: "lista!A2:G24",
             terminado: "lista!E2:F5",
             porcTerminado: "lista!A2:E12",

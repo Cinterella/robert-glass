@@ -16,9 +16,9 @@ const TerminadoFormControl = ({
   helperText,
   width="100%",
 }) => {
-  const [data, setData] = useState([]); // Estado para almacenar los datos
+  const [data, setData] = useState([]);
+  const [firstPrecioTerminado, setFirstPrecioTerminado] = useState("");
 
-  // Fetch los datos de Google Sheets
   useEffect(() => {
     const fetchSheetData = async () => {
       try {
@@ -26,36 +26,44 @@ const TerminadoFormControl = ({
         const response = await fetch(
           `/.netlify/functions/fetchSheetData?range=${range}`
         );
-
         if (!response.ok) {
           throw new Error('Failed to fetch data from the server.');
         }
-
         const sheetData = await response.json();
 
         const transformedData = sheetData
-        .map(({ KEY, TIPOTERMINADO, PRECIOTERMINADO }) => ({
-          KEY, 
-          TIPOTERMINADO,
-          PRECIOTERMINADO,
-        }))
-        .filter(
-          (row) =>
-            row.TIPOTERMINADO && row.PRECIOTERMINADO
-        );
-
+          .map(({ KEY, TIPOTERMINADO, PRECIOTERMINADO }) => ({
+            KEY,
+            TIPOTERMINADO,
+            PRECIOTERMINADO,
+          }))
+          .filter(
+            (row) =>
+              row.TIPOTERMINADO
+          );
         setData(transformedData);
-        // console.log("Datos transformados:", transformedData);
+
+        if (transformedData.length > 0) {
+          setFirstPrecioTerminado(transformedData[0].PRECIOTERMINADO);
+        }
+
       } catch (error) {
         console.error("Error fetching data from spreadsheet:", error);
       }
     };
 
     fetchSheetData();
-  }, []); // Dependencias para volver a ejecutar el fetch si cambian
+  }, []);
 
   return (
+    
     <FormControl sx={{ m: 0, width }}>
+      <InputLabel
+        id="precio-terminado-tapa-colgante"
+        type="hidden" 
+        name={`hidden-${id}`} 
+        value={firstPrecioTerminado} 
+      />
       <InputLabel id={`label-${id}`}>{label}</InputLabel>
       <Select
         id={id}
@@ -67,7 +75,7 @@ const TerminadoFormControl = ({
         {data.map((row, index) => (
           <MenuItem
             key={index}
-            value={`${row.KEY}-${row.PRECIOTERMINADO}`}
+            value={`${row.KEY}-${row.TIPOTERMINADO}`}
           >
             {row.TIPOTERMINADO}
           </MenuItem>

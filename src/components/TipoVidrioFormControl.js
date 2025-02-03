@@ -76,32 +76,32 @@ const TipoVidrioFormControl = ({
   return (
     <FormControl required sx={{ m: 0, width }}>
       <InputLabel id={`label-${id}`}>{label}</InputLabel>
-      <Select
-        id={id}
-        labelId={`label-${id}`}
-        value={value}
-        onChange={handleSelectChange}
-        label={label}
-        autoWidth
-      >
-        {data.map((row, index) => (
-          <MenuItem
-            key={index}
-            value={`${row.KEY}-${row.TIPOVIDRIO}-${row.PRECIOVIDRIO}-${row.PRECIOVIDRIOGANANCIA}`}
-            data-price={`${row.PRECIOVIDRIOGANANCIA}`}
-          >
-            {row.TIPOVIDRIO}
-          </MenuItem>
-        ))}
-        {additionalMenuItems.map((item, index) => (
-          <MenuItem 
-          key={`additional-${index}`} 
-          value={item.value}
-          >
-            {item.label}
-          </MenuItem>
-        ))}
-      </Select>
+        <Select
+          id={id}
+          labelId={`label-${id}`}
+          value={value}
+          onChange={handleSelectChange}
+          label={label}
+          autoWidth
+        >
+          {data.map((row, index) => (
+            <MenuItem
+              key={index}
+              value={`${row.KEY}-${row.TIPOVIDRIO}-${row.PRECIOVIDRIO}-${row.PRECIOVIDRIOGANANCIA}`}
+              data-price={`${row.PRECIOVIDRIOGANANCIA}`}
+            >
+              {row.TIPOVIDRIO}
+            </MenuItem>
+          ))}
+          {additionalMenuItems.map((item, index) => (
+            <MenuItem 
+            key={`additional-${index}`} 
+            value={item.value}
+            >
+              {item.label}
+            </MenuItem>
+          ))}
+        </Select>
       <FormHelperText>
         Precio lista: $ <span id="vidrio-precio" className="highlight">{helperText.precioLista}</span> x m²<br></br>
         Precio c/Ganancia: $ <span id="vidrio-precio-ganancia" className="highlight-secondary">{helperText.precioGanancia}</span> x m²

@@ -1,21 +1,9 @@
 import * as React from 'react';
 import  { Fragment , useState } from 'react';
-//import config from "../config";
 import Box from '@mui/material/Box';
-//import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
-//import FormControlLabel from '@mui/material/FormControlLabel';
-//import InputLabel from '@mui/material/InputLabel';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-//import Typography from '@mui/material/Typography';
-//import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-//import Paper from '@mui/material/Paper';
-//import { styled } from '@mui/material/styles';
-//import MenuItem from '@mui/material/MenuItem';
-//import Select from '@mui/material/Select';
-//import Typography from '@mui/material/Typography';
-//import SendWABtn from "./SendWABtn";
 
 import TipoVidrioFormControl from "./TipoVidrioFormControl";
 import BaseInputFormControl from "./BaseInputFormControl";
@@ -27,9 +15,6 @@ import TipoVarillaFormControl from './TipoVarillaFormControl';
 import TipoPaspartuFormControl from './TipoPaspartuFormControl';
 import DesperdicioPaspartuFormControl from './DesperdicioPaspartuFormControl';
 
-//import { calcularPrecio } from '../functions/calcularPrecio'; 
-
-//const WIDTHINPUT = global.config.widths.input;
 const bkg1 = global.config.colors.bkg1;
 
 const Item = (props) => {
@@ -69,7 +54,7 @@ const ShowFrameTable = () => {
   const handleSelectTerminado = (event) => {
     setSelectedTerminado(event.target.value);
   };
-
+  
   const [selectedPorcentajeTerminado, setSelectedPorcentajeTerminado] = useState(1);
   const handleSelectPorcentajeTerminadoChange = (event) => {
     setSelectedPorcentajeTerminado(event.target.value);
@@ -109,18 +94,19 @@ const ShowFrameTable = () => {
     var paspartuSelectInput = "";
     var paspartuPrecioGananciaInput = "";
     var desperdicioPaspartuInput = "";
-    //var terminadoSelectInput = "";
+    var terminadoSelectInput = "";
+    var terminadoTapaColganteSelectInput = "";
     var porcentajeTerminadoInput = "";
 
     function getNextSiblingInputValue(currentDivId) {
-      const currentDiv = document.getElementById(currentDivId);
+      let currentDiv = document.getElementById(currentDivId);
       if (!currentDiv) {
         console.error("Element with the provided ID not found.");
         return null;
       }
-      const nextSibling = currentDiv.nextElementSibling;
+      let nextSibling = currentDiv.nextElementSibling;
       if (nextSibling && nextSibling.tagName.toLowerCase() === 'input') {
-        const inputValue = nextSibling.value;
+        let inputValue = nextSibling.value;
     
         if (!inputValue || inputValue.includes("N/A")) {
           return null;
@@ -142,33 +128,18 @@ const ShowFrameTable = () => {
     paspartuSelectInput = document.getElementById("tipo-paspartu-select").innerText;
     paspartuPrecioGananciaInput = document.getElementById("paspartu-precio-ganancia").innerText;
     desperdicioPaspartuInput = getNextSiblingInputValue("desperdicio-paspartu");
-    //terminadoSelectInput = document.getElementById("terminado-select").innerText;
     porcentajeTerminadoInput = getNextSiblingInputValue("porcentaje-terminado");
+    terminadoSelectInput = document.getElementById("terminado-select").innerText;
+    terminadoTapaColganteSelectInput = document.getElementById("precio-terminado-tapa-colgante");
+    terminadoTapaColganteSelectInput = terminadoTapaColganteSelectInput.getAttribute("value");
     
-    /* console.log("--------------------------") 
-    console.log("vidrioSelectInput: "+vidrioSelectInput)
-    console.log("vidrioPrecioGananciaInput: "+vidrioPrecioGananciaInput)
-    console.log("desperdicioVidrioInput: "+desperdicioVidrioInput)
-    console.log("baseInput: "+baseInput)
-    console.log("alturaInput: "+alturaInput)
-    console.log("varillaSelectInput: "+varillaSelectInput) 
-    console.log("varillaPrecioGananciaInput: "+varillaPrecioGananciaInput) 
-    console.log("paspartuSelectInput: "+paspartuSelectInput) 
-    console.log("paspartuPrecioGananciaInput: "+paspartuPrecioGananciaInput) 
-    console.log("desperdicioPaspartuInput: "+desperdicioPaspartuInput) 
-    console.log("terminadoSelectInput: "+terminadoSelectInput)
-    console.log("porcentajeTerminadoInput: "+porcentajeTerminadoInput)
-    console.log("--------------------------")  */
-
     var msgErrorVidrio = "";
     var msgErrorBase = "";
     var msgErrorAltura = "";
-    var msgErrorTerminado = "";
 
     resultadoDiv.innerText = "";
     errorDiv.innerText = "";
     
-
     if (getNextSiblingInputValue("tipo-vidrio-select") === null){
       msgErrorVidrio = "Seleccione el TIPO DE VIDRIO. ";
       errorDiv.innerHTML += msgErrorVidrio;
@@ -181,25 +152,18 @@ const ShowFrameTable = () => {
       msgErrorAltura = "Ingrese ALTURA mayor a 0 cm. ";
       errorDiv.innerHTML += msgErrorAltura;
     }
-    if (getNextSiblingInputValue("terminado-select") === null){
-      msgErrorTerminado = "Seleccione el TIPO DE TERMINADO. ";
-      errorDiv.innerHTML += msgErrorTerminado;
-    }
+
     if (getNextSiblingInputValue("tipo-varilla-select") !== null){
       varillaPrecioGananciaInput = Number(varillaPrecioGananciaInput)
-      //console.log(varillaPrecioGananciaInput)
     }
     if(getNextSiblingInputValue("tipo-paspartu-select") !== null){
       paspartuPrecioGananciaInput = Number(paspartuPrecioGananciaInput)
-      //console.log(paspartuPrecioGananciaInput)
     }
-    if (getNextSiblingInputValue("porcentaje-terminado") !== null){
+    if (getNextSiblingInputValue("desperdicio-paspartu") !== null){
       desperdicioPaspartuInput = Number(desperdicioPaspartuInput)
-      //console.log(desperdicioPaspartuInput)
     }
-    //console.log("*************************************************")
 
-    if ( msgErrorVidrio === "" && msgErrorBase === "" && msgErrorAltura === "" && msgErrorTerminado === "" ){
+    if ( msgErrorVidrio === "" && msgErrorBase === "" && msgErrorAltura === "" ){
       let baseEnMetros = Number(baseInput) / 100;
       let alturaEnMetros = Number(alturaInput) / 100;
       let perimetroEnMetros = 2 * ( Number(baseEnMetros) +  Number(alturaEnMetros) );
@@ -208,26 +172,38 @@ const ShowFrameTable = () => {
       let precioVidrio = (superficieEnMetros * Number(vidrioPrecioGananciaInput) ) * Number(desperdicioVidrioInput);
       let precioVarilla = ( perimetroEnMetros * varillaPrecioGananciaInput );
       let precioPaspartu = ( superficieEnMetros * Number(paspartuPrecioGananciaInput) ) * Number(desperdicioPaspartuInput);
-      //let terminado = document.getElementById("terminado-select").innerText;
       let precioTerminado = Number(porcentajeTerminadoInput);
-      let precioFinal = Math.round( ( precioVidrio + precioVarilla + precioPaspartu ) * precioTerminado );
-      //console.log("precioVidrio: "+precioVidrio)
-      //console.log("precioVarilla: "+precioVarilla)
-      //console.log("precioPaspartu: "+precioPaspartu)
-      //console.log("terminado: "+terminado)
-      //console.log("precioTerminado: "+precioTerminado)
+      let precioTapaColganteSelectInput = ( baseEnMetros * alturaEnMetros ) * Number(terminadoTapaColganteSelectInput);
+      
+      console.log("precioVidrio: "+precioVidrio)
+      console.log("precioVarilla: "+precioVarilla)
+      console.log("precioPaspartu: "+precioPaspartu)
+      console.log("terminadoTapaColganteSelectInput: "+terminadoTapaColganteSelectInput)
+      console.log("terminado: "+terminadoSelectInput)
+      console.log("precioTerminado: "+precioTerminado)
+      let precioFinal = Math.round( ( precioVidrio + precioVarilla + precioPaspartu + precioTapaColganteSelectInput ) * precioTerminado );
+      console.log("precioFinal: "+precioFinal)
 
       msgOK = "Precio por '"+vidrioSelectInput+"' de "+ baseInput+"cm x "+alturaInput+"cm. ";
+      //VARILLA
       if( getNextSiblingInputValue("tipo-varilla-select") ) {
         msgOK += "Varilla: '"+varillaSelectInput+"'. ";
       }else{
         msgOK += "";
       }
+      //PASPARTU
       if( getNextSiblingInputValue("tipo-paspartu-select") ) {
         msgOK += "Paspartu: '"+paspartuSelectInput+"'. ";
       }else{
         msgOK += "";
       }
+      //TERMINADO
+      if( terminadoSelectInput === "Cortado" || terminadoSelectInput === "Pulido" || terminadoSelectInput === "Colocado" ) {
+        msgOK += "Terminado: '"+terminadoSelectInput+"'. ";
+      }else{
+        msgOK += "Terminado: N/A. ";
+      }
+
       msgOK += "Total: $"+precioFinal+".";
       resultadoDiv.innerHTML += msgOK;
     }
@@ -236,17 +212,19 @@ const ShowFrameTable = () => {
   const handleSendToWhatsApp = () => {
     const phoneNumber = document.getElementById("phoneValue").value;
     if (!phoneNumber) {
-      alert("Please enter a phone number.");
+      alert("Ingrese un número de teléfono.");
       return;
     }
     const encodeMsg0 = encodeURIComponent("🪟 *Robert Glass* - Taller de enmarcado, vidrios y espejos");
-    const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA). Horario de atención: Lunes a Viernes: 10 a 13hs y 15 a 19hs. Sábados: 10 a 13hs.");
+    const encodeMsg1 = encodeURIComponent("📍 Virrey Aviles 2718 - Av. Francisco Beiró 3091 (CABA). Horario de atención: Lunes a Viernes: 10 a 13hs y 15 a 19hs. Sábados: 10 a 13hs. https://maps.app.goo.gl/7cw7xh1KLGmFYicf9");
     const presupuestoDetalle = document.getElementsByClassName("MuiAlert-message")[1]?.innerText || '';
     const encodeMsg2 = encodeURIComponent("📱 1157690193");
     const encodeMsg3 = encodeURIComponent("💲*Presupuesto:* ");
     const encodeMsg4 = encodeURIComponent(presupuestoDetalle);
     const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a${encodeMsg2}%0a%0a${encodeMsg3}%0a${encodeMsg4}%0a`;
-
+    // AGREGAR FOTO 
+    // AGREGAR ENLACE GOOGLE
+    // https://maps.app.goo.gl/7cw7xh1KLGmFYicf9
     const formattedPhoneNumber = `54${phoneNumber}`;
     const whatsappURL = `https://api.whatsapp.com/send?phone=${formattedPhoneNumber}&text=${mensajeAEnviar}`;
 
@@ -398,7 +376,7 @@ const ShowFrameTable = () => {
               />
             </Item>
             <Item>    
-            <Button 
+              <Button 
                 id="enviarWA" 
                 onClick={handleSendToWhatsApp} 
                 variant="contained" 
