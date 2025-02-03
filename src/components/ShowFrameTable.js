@@ -15,14 +15,14 @@ import TipoVarillaFormControl from './TipoVarillaFormControl';
 import TipoPaspartuFormControl from './TipoPaspartuFormControl';
 //import DesperdicioPaspartuFormControl from './DesperdicioPaspartuFormControl';
 
-const bkg1 = global.config.colors.bkg1;
+//const bkg1 = global.config.colors.bkg1;
 
 const Item = (props) => {
   return (
     <Box
       sx={{
         color: (theme) => (theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800'),
-        p: 1,
+        p: 0,
         m: 0,
         borderRadius: 2,
         fontSize: '0.875rem',
@@ -231,20 +231,20 @@ const ShowFrameTable = () => {
 
   return (
     <Fragment>
-      <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', borderRadius: 3, backgroundColor: bkg1 }}>
+      <Box sx={{ display: 'grid', gap: 1, p:0, m:0, gridTemplateColumns: 'repeat(1, 1fr)' }}>
         <Item>
           <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: {
-            xs: "repeat(1, 1fr)", // 1 column on extra small screens
-            sm: "repeat(1, 1fr)", // 2 columns on small screens
-            md: "repeat(3, 1fr)", // 3 columns on medium screens
-            lg: "repeat(3, 1fr)", // 4 columns on large screens
+            xs: "repeat(1, 1fr)",
+            sm: "repeat(1, 1fr)",
+            md: "repeat(3, 1fr)",
+            lg: "repeat(3, 1fr)",
           }, backgroundColor: '#fff', borderRadius: 2, p:0, margin: 'auto', width: 'auto' }}>
             <Item>
               <TipoVidrioFormControl
                 id="tipo-vidrio-select"
                 label="Tipo Vidrio"
                 value={selectedTipoVidrio}
-                onChange={handleSelectTipoVidrio} // Propagate changes to parent
+                onChange={handleSelectTipoVidrio}
                 helperText={{
                   precioLista: "100.00",
                   precioGanancia: "120.00",
@@ -269,7 +269,7 @@ const ShowFrameTable = () => {
 
           <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(3, 1fr)'}}>
             <Item>
-              <Box sx={{ display: 'grid', gridTemplateRows: 'repeat(1, 1fr)' ,backgroundColor: bkg1}}>
+              <Box sx={{ display: 'grid', p:0, gridTemplateRows: 'repeat(1, 1fr)'}}>
                 <Item>
                   <FormGroup>
                     <TipoVarillaFormControl
@@ -291,7 +291,7 @@ const ShowFrameTable = () => {
             </Item>
             
             <Item>
-              <Box sx={{ display: 'grid', gap: 1, gridTemplateRows: 'repeat(1, 0.75fr)' ,backgroundColor: bkg1}}>
+              <Box sx={{ display: 'grid', gap: 1, gridTemplateRows: 'repeat(1, 0.75fr)'}}>
                 <Item>
                   <FormGroup>
                     <TipoPaspartuFormControl

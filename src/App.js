@@ -26,7 +26,7 @@ const App = () => {
           <Tab label="VIDRIOS" />
         </Tabs>
 
-        <Box sx={{ marginTop: 2 }}>
+        <Box sx={{ marginTop: 2, p:1, backgroundColor:"#f6f6f6", borderRadius: 2 }}>
           {currentTab === 0 && <ShowFrameTable />}
           {currentTab === 1 && <ShowVidTable />}
         </Box>

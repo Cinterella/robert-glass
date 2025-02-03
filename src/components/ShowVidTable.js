@@ -12,14 +12,14 @@ import TerminadoFormControl from "./TerminadoFormControl";
 import PorcentajeTerminadoFormControl from "./PorcentajeTerminadoFormControl";
 //import DesperdicioVidrioFormControl from "./DesperdicioVidrioFormControl";
 
-const bkg1 = global.config.colors.bkg1;
+//const bkg1 = global.config.colors.bkg1;
 
 const Item = (props) => {
   return (
     <Box
       sx={{
         color: (theme) => (theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800'),
-        p: 1,
+        p: 0,
         m: 0,
         borderRadius: 2,
         fontSize: '0.875rem',
@@ -171,7 +171,7 @@ const ShowVidTable = () => {
 
   return (
     <Fragment>
-      <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', borderRadius: 3, backgroundColor: bkg1 }}>
+      <Box sx={{ display: 'grid', gap: 1, p:0, m:0, gridTemplateColumns: 'repeat(1, 1fr)' }}>
         <Item>
         <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: {
             xs: "repeat(1, 1fr)", // 1 column on extra small screens
@@ -260,7 +260,7 @@ const ShowVidTable = () => {
                 type="tel" 
                 placeholder="Ejemplo: 1143214321" 
                 style={{
-                  width: "-webkit-fill-available", padding: "20px 15px", 
+                  width: "-webkit-fill-available", 
                   margin: "0", border: "1px solid #ccc", borderRadius: "4px", fontSize: "0.875rem"
                 }}
               />
@@ -270,7 +270,7 @@ const ShowVidTable = () => {
                 id="enviarWA" 
                 onClick={handleSendToWhatsApp} 
                 variant="contained" 
-                sx={{ m: 0, p:1.5, backgroundColor: "#008069", width: '100%' }}
+                sx={{ backgroundColor: "#008069", width: '100%' }}
               >
                 Enviar por WhatsApp
               </Button>
