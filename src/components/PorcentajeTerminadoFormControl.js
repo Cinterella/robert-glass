@@ -3,7 +3,7 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const PorcentajeTerminadoFormControl = ({
   id = "porcentaje-terminado",
-  label = "Porcentaje Terminado (%)",
+  label = "Porcentaje CLIENTE (%)",
   value,
   onChange,
   width="100%",

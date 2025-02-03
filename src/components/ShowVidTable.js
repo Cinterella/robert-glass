@@ -10,7 +10,7 @@ import BaseInputFormControl from "./BaseInputFormControl";
 import AlturaInputFormControl from "./AlturaInputFormControl";
 import TerminadoFormControl from "./TerminadoFormControl";
 import PorcentajeTerminadoFormControl from "./PorcentajeTerminadoFormControl";
-import DesperdicioVidrioFormControl from "./DesperdicioVidrioFormControl";
+//import DesperdicioVidrioFormControl from "./DesperdicioVidrioFormControl";
 
 const bkg1 = global.config.colors.bkg1;
 
@@ -58,10 +58,10 @@ const ShowVidTable = () => {
     setSelectedPorcentajeTerminado(event.target.value);
   };
   
-  const [selectedDespVidrio, setSelectedDespVidrio] = useState(1);
+  /* const [selectedDespVidrio, setSelectedDespVidrio] = useState(1);
   const handleSelectDespVidrioChange = (event) => {
     setSelectedDespVidrio(event.target.value);
-  };
+  }; */
 
   const handleShowPrice = () => {
     var resultadoDiv = document.getElementById("resultado");
@@ -70,7 +70,7 @@ const ShowVidTable = () => {
     var msgOK = "";
     var vidrioSelectInput = "";
     var vidrioPrecioGananciaInput = "";
-    var desperdicioVidrioInput = "";
+    //var desperdicioVidrioInput = "";
     var baseInput = "";
     var alturaInput = "";
     //var varillaSelectInput = "";
@@ -102,7 +102,7 @@ const ShowVidTable = () => {
 
     vidrioSelectInput = document.getElementById("tipo-vidrio-select").innerText;
     vidrioPrecioGananciaInput = document.getElementById("vidrio-precio-ganancia").innerText;
-    desperdicioVidrioInput = getNextSiblingInputValue("desperdicio-vidrio");
+    //desperdicioVidrioInput = getNextSiblingInputValue("desperdicio-vidrio");
     baseInput = document.getElementById("base").value;
     alturaInput = document.getElementById("altura").value;
     porcentajeTerminadoInput = getNextSiblingInputValue("porcentaje-terminado");
@@ -133,7 +133,7 @@ const ShowVidTable = () => {
       let alturaEnMetros = Number(alturaInput) / 100;
       let superficieEnMetros = ( Number(baseEnMetros) *  Number(alturaEnMetros) ); 
 
-      let precioVidrio = (superficieEnMetros * Number(vidrioPrecioGananciaInput) ) * Number(desperdicioVidrioInput);
+      let precioVidrio = (superficieEnMetros * Number(vidrioPrecioGananciaInput) );
       let precioTerminado = Number(porcentajeTerminadoInput);
       let precioFinal = Math.round( ( precioVidrio ) * precioTerminado );
 
@@ -142,8 +142,6 @@ const ShowVidTable = () => {
       //TERMINADO
       if( terminadoSelectInput === "Cortado" || terminadoSelectInput === "Pulido" || terminadoSelectInput === "Colocado" ) {
         msgOK += "Terminado: '"+terminadoSelectInput+"'. ";
-      }else{
-        msgOK += "Terminado: N/A. ";
       }
 
       msgOK += "Total: $"+precioFinal+".";
@@ -165,8 +163,6 @@ const ShowVidTable = () => {
     const encodeMsg4 = encodeURIComponent(presupuestoDetalle);
     const mensajeAEnviar = `${encodeMsg0}%0a${encodeMsg1}%0a${encodeMsg2}%0a%0a${encodeMsg3}%0a${encodeMsg4}%0a`;
     // AGREGAR FOTO 
-    // AGREGAR ENLACE GOOGLE
-    // https://maps.app.goo.gl/7cw7xh1KLGmFYicf9
     const formattedPhoneNumber = `54${phoneNumber}`;
     const whatsappURL = `https://api.whatsapp.com/send?phone=${formattedPhoneNumber}&text=${mensajeAEnviar}`;
 
@@ -175,39 +171,26 @@ const ShowVidTable = () => {
 
   return (
     <Fragment>
-      <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)', backgroundColor: bkg1 }}>
+      <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', borderRadius: 3, backgroundColor: bkg1 }}>
         <Item>
-          <Box sx={{ display: 'grid', gap: 0, gridTemplateColumns: {
+        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: {
             xs: "repeat(1, 1fr)", // 1 column on extra small screens
             sm: "repeat(1, 1fr)", // 2 columns on small screens
-            md: "repeat(2, 1fr)", // 3 columns on medium screens
-            lg: "repeat(2, 1fr)", // 4 columns on large screens
-          }, backgroundColor: '#fff', borderRadius: 2, p:1, margin: 'auto', width: 'auto' }}>
+            md: "repeat(3, 1fr)", // 3 columns on medium screens
+            lg: "repeat(3, 1fr)", // 4 columns on large screens
+          }, backgroundColor: '#fff', borderRadius: 2, p:0, margin: 'auto', width: 'auto' }}>
             <Item>
               <TipoVidrioFormControl
                 id="tipo-vidrio-select"
                 label="Tipo Vidrio"
                 value={selectedTipoVidrio}
-                onChange={handleSelectTipoVidrio} // Propagate changes to parent
+                onChange={handleSelectTipoVidrio}
                 helperText={{
                   precioLista: "100.00",
                   precioGanancia: "120.00",
                 }}
               />
             </Item>
-            <Item>
-              <DesperdicioVidrioFormControl
-                value={selectedDespVidrio}
-                onChange={handleSelectDespVidrioChange}
-              />
-            </Item>
-          </Box>
-          <Box sx={{ display: 'grid', gap: 0, gridTemplateColumns: {
-            xs: "repeat(1, 1fr)", // 1 column on extra small screens
-            sm: "repeat(1, 1fr)", // 2 columns on small screens
-            md: "repeat(2, 1fr)", // 3 columns on medium screens
-            lg: "repeat(2, 1fr)", // 4 columns on large screens
-          }, backgroundColor: '#fff', borderRadius: 2, p:1, margin: 'auto', width: 'auto' }}>
             <Item>
               <BaseInputFormControl
                 value={baseValue}
@@ -222,38 +205,41 @@ const ShowVidTable = () => {
                 helperText="Por favor, ingrese la altura en cm."
               />
             </Item>
-          </Box>
+          </Box>  
         </Item>
+
         <Item>
-          <Box sx={{ display: 'grid', gap: 1,gridTemplateColumns: 'repeat(1, 1fr)'}}>
+        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: {
+            xs: "repeat(1, 1fr)", // 1 column on extra small screens
+            sm: "repeat(1, 1fr)", // 2 columns on small screens
+            md: "repeat(3, 1fr)", // 3 columns on medium screens
+            lg: "repeat(3, 1fr)", // 4 columns on large screens
+          }, borderRadius: 2, p:0, margin: 'auto', width: 'auto' }}>
             <Item>
-              <Box sx={{ display: 'grid', gap: 1, gridTemplateRows: 'repeat(1, 1fr)'}}>
-                <Item>
-                  <TerminadoFormControl
-                    id="terminado-select"
-                    label="Seleccione un terminado"
-                    value={selectTerminado}
-                    onChange={handleSelectTerminado}
-                    helperText={`${selectTerminado}`}
-                    additionalMenuItems={[
-                      {},
-                    ]}
-                  />
-                </Item>
-                <Item>
-                  <PorcentajeTerminadoFormControl
-                    value={selectedPorcentajeTerminado}
-                    onChange={handleSelectPorcentajeTerminadoChange}
-                  />
-                </Item>
-                <Item>
-                  <Button variant="contained" onClick={handleShowPrice} sx={{ m: 0, width: '100%' }}>Mostrar precio</Button>
-                </Item>
-              </Box>
+              <TerminadoFormControl
+                id="terminado-select"
+                label="Seleccione un terminado"
+                value={selectTerminado}
+                onChange={handleSelectTerminado}
+                helperText={`${selectTerminado}`}
+                additionalMenuItems={[
+                  {},
+                ]}
+              />
+            </Item>
+            <Item>
+              <PorcentajeTerminadoFormControl
+                value={selectedPorcentajeTerminado}
+                onChange={handleSelectPorcentajeTerminadoChange}
+              />
+            </Item>
+            <Item>
+              <Button variant="contained" onClick={handleShowPrice} sx={{ m: 0, width: '100%' }}>Mostrar precio</Button>
             </Item>
           </Box>
         </Item>
-      </Box>  
+      </Box>
+
       <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)' }}>
         <Item>
           <Alert id="errorContainer" variant="outlined" severity="error" sx={{ m: 1, width: 'auto' }}>
@@ -265,29 +251,34 @@ const ShowVidTable = () => {
         </Item>
       </Box>
 
-      <Box id="enviarWABox" sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)' }}>
+      <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)' }}>
         <Item>    
-          <input 
-            id="phoneValue" 
-            type="tel" 
-            placeholder="Ejemplo: 1143214321" 
-            style={{
-              width: "-webkit-fill-available", padding: "20px 15px", 
-              margin: "0", border: "1px solid #ccc", borderRadius: "4px", fontSize: "0.875rem"
-            }}
-          />
+          <Box id="enviarWABox" sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)' }}>
+            <Item>    
+              <input 
+                id="phoneValue" 
+                type="tel" 
+                placeholder="Ejemplo: 1143214321" 
+                style={{
+                  width: "-webkit-fill-available", padding: "20px 15px", 
+                  margin: "0", border: "1px solid #ccc", borderRadius: "4px", fontSize: "0.875rem"
+                }}
+              />
+            </Item>
+            <Item>   
+              <Button 
+                id="enviarWA" 
+                onClick={handleSendToWhatsApp} 
+                variant="contained" 
+                sx={{ m: 0, p:1.5, backgroundColor: "#008069", width: '100%' }}
+              >
+                Enviar por WhatsApp
+              </Button>
+            </Item>
+          </Box> 
         </Item>
-        <Item>    
-        <Button 
-            id="enviarWA" 
-            onClick={handleSendToWhatsApp} 
-            variant="contained" 
-            sx={{ m: 0, p:1.5, backgroundColor: "#008069", width: '100%' }}
-          >
-            Enviar por WhatsApp
-          </Button>
-        </Item>
-      </Box>        
+      </Box>
+             
     </Fragment>
   );
 };

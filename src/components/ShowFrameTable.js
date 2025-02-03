@@ -10,10 +10,10 @@ import BaseInputFormControl from "./BaseInputFormControl";
 import AlturaInputFormControl from "./AlturaInputFormControl";
 import TerminadoFormControl from "./TerminadoFormControl";
 import PorcentajeTerminadoFormControl from "./PorcentajeTerminadoFormControl";
-import DesperdicioVidrioFormControl from "./DesperdicioVidrioFormControl";
+//import DesperdicioVidrioFormControl from "./DesperdicioVidrioFormControl";
 import TipoVarillaFormControl from './TipoVarillaFormControl';
 import TipoPaspartuFormControl from './TipoPaspartuFormControl';
-import DesperdicioPaspartuFormControl from './DesperdicioPaspartuFormControl';
+//import DesperdicioPaspartuFormControl from './DesperdicioPaspartuFormControl';
 
 const bkg1 = global.config.colors.bkg1;
 
@@ -69,15 +69,15 @@ const ShowFrameTable = () => {
   const handleSelectTipoPaspartu = (event) => {
     setSelectedTipoPaspartu(event.target.value);
   };
-  const [selectedDespPaspartu, setSelectedDespPaspartu] = useState(1.0);
+  /* const [selectedDespPaspartu, setSelectedDespPaspartu] = useState(1.0);
   const handleSelectDespPaspartuChange = (event) => {
     setSelectedDespPaspartu(event.target.value);
-  };
+  }; */
   
-  const [selectedDespVidrio, setSelectedDespVidrio] = useState(1);
+  /* const [selectedDespVidrio, setSelectedDespVidrio] = useState(1);
   const handleSelectDespVidrioChange = (event) => {
     setSelectedDespVidrio(event.target.value);
-  };
+  }; */
 
   const handleShowPrice = () => {
     var resultadoDiv = document.getElementById("resultado");
@@ -86,14 +86,14 @@ const ShowFrameTable = () => {
     var msgOK = "";
     var vidrioSelectInput = "";
     var vidrioPrecioGananciaInput = "";
-    var desperdicioVidrioInput = "";
+    //var desperdicioVidrioInput = "";
     var baseInput = "";
     var alturaInput = "";
     var varillaSelectInput = "";
     var varillaPrecioGananciaInput = "";
     var paspartuSelectInput = "";
     var paspartuPrecioGananciaInput = "";
-    var desperdicioPaspartuInput = "";
+    //var desperdicioPaspartuInput = "";
     var terminadoSelectInput = "";
     var terminadoTapaColganteSelectInput = "";
     var porcentajeTerminadoInput = "";
@@ -120,14 +120,14 @@ const ShowFrameTable = () => {
 
     vidrioSelectInput = document.getElementById("tipo-vidrio-select").innerText;
     vidrioPrecioGananciaInput = document.getElementById("vidrio-precio-ganancia").innerText;
-    desperdicioVidrioInput = getNextSiblingInputValue("desperdicio-vidrio");
+    //desperdicioVidrioInput = getNextSiblingInputValue("desperdicio-vidrio");
     baseInput = document.getElementById("base").value;
     alturaInput = document.getElementById("altura").value;
     varillaSelectInput = document.getElementById("tipo-varilla-select").innerText;
     varillaPrecioGananciaInput = document.getElementById("varilla-precio-ganancia").innerText;
     paspartuSelectInput = document.getElementById("tipo-paspartu-select").innerText;
     paspartuPrecioGananciaInput = document.getElementById("paspartu-precio-ganancia").innerText;
-    desperdicioPaspartuInput = getNextSiblingInputValue("desperdicio-paspartu");
+    //desperdicioPaspartuInput = getNextSiblingInputValue("desperdicio-paspartu");
     porcentajeTerminadoInput = getNextSiblingInputValue("porcentaje-terminado");
     terminadoSelectInput = document.getElementById("terminado-select").innerText;
     terminadoTapaColganteSelectInput = document.getElementById("precio-terminado-tapa-colgante");
@@ -159,9 +159,9 @@ const ShowFrameTable = () => {
     if(getNextSiblingInputValue("tipo-paspartu-select") !== null){
       paspartuPrecioGananciaInput = Number(paspartuPrecioGananciaInput)
     }
-    if (getNextSiblingInputValue("desperdicio-paspartu") !== null){
+    /* if (getNextSiblingInputValue("desperdicio-paspartu") !== null){
       desperdicioPaspartuInput = Number(desperdicioPaspartuInput)
-    }
+    } */
 
     if ( msgErrorVidrio === "" && msgErrorBase === "" && msgErrorAltura === "" ){
       let baseEnMetros = Number(baseInput) / 100;
@@ -169,9 +169,9 @@ const ShowFrameTable = () => {
       let perimetroEnMetros = 2 * ( Number(baseEnMetros) +  Number(alturaEnMetros) );
       let superficieEnMetros = ( Number(baseEnMetros) *  Number(alturaEnMetros) ); 
 
-      let precioVidrio = (superficieEnMetros * Number(vidrioPrecioGananciaInput) ) * Number(desperdicioVidrioInput);
+      let precioVidrio = (superficieEnMetros * Number(vidrioPrecioGananciaInput) );
       let precioVarilla = ( perimetroEnMetros * varillaPrecioGananciaInput );
-      let precioPaspartu = ( superficieEnMetros * Number(paspartuPrecioGananciaInput) ) * Number(desperdicioPaspartuInput);
+      let precioPaspartu = ( superficieEnMetros * Number(paspartuPrecioGananciaInput) );
       let precioTerminado = Number(porcentajeTerminadoInput);
       let precioTapaColganteSelectInput = ( baseEnMetros * alturaEnMetros ) * Number(terminadoTapaColganteSelectInput);
       
@@ -200,8 +200,6 @@ const ShowFrameTable = () => {
       //TERMINADO
       if( terminadoSelectInput === "Cortado" || terminadoSelectInput === "Pulido" || terminadoSelectInput === "Colocado" ) {
         msgOK += "Terminado: '"+terminadoSelectInput+"'. ";
-      }else{
-        msgOK += "Terminado: N/A. ";
       }
 
       msgOK += "Total: $"+precioFinal+".";
@@ -233,14 +231,14 @@ const ShowFrameTable = () => {
 
   return (
     <Fragment>
-      <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', backgroundColor: bkg1 }}>
+      <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1, 1fr)', borderRadius: 3, backgroundColor: bkg1 }}>
         <Item>
           <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: {
             xs: "repeat(1, 1fr)", // 1 column on extra small screens
             sm: "repeat(1, 1fr)", // 2 columns on small screens
-            md: "repeat(2, 1fr)", // 3 columns on medium screens
-            lg: "repeat(4, 1fr)", // 4 columns on large screens
-          }, backgroundColor: '#fff', borderRadius: 2, p:2, margin: 'auto', width: 'auto' }}>
+            md: "repeat(3, 1fr)", // 3 columns on medium screens
+            lg: "repeat(3, 1fr)", // 4 columns on large screens
+          }, backgroundColor: '#fff', borderRadius: 2, p:0, margin: 'auto', width: 'auto' }}>
             <Item>
               <TipoVidrioFormControl
                 id="tipo-vidrio-select"
@@ -251,12 +249,6 @@ const ShowFrameTable = () => {
                   precioLista: "100.00",
                   precioGanancia: "120.00",
                 }}
-              />
-            </Item>
-            <Item>
-              <DesperdicioVidrioFormControl
-                value={selectedDespVidrio}
-                onChange={handleSelectDespVidrioChange}
               />
             </Item>
             <Item>
@@ -275,9 +267,9 @@ const ShowFrameTable = () => {
             </Item>
           </Box>
 
-          <Box sx={{ display: 'grid', gap: 1,gridTemplateColumns: 'repeat(3, 1fr)'}}>
+          <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(3, 1fr)'}}>
             <Item>
-              <Box sx={{ display: 'grid', gridTemplateRows: 'repeat(1, 0.75fr)' ,backgroundColor: bkg1}}>
+              <Box sx={{ display: 'grid', gridTemplateRows: 'repeat(1, 1fr)' ,backgroundColor: bkg1}}>
                 <Item>
                   <FormGroup>
                     <TipoVarillaFormControl
@@ -315,11 +307,6 @@ const ShowFrameTable = () => {
                         {},
                       ]}
                     />
-                    <DesperdicioPaspartuFormControl
-                      value={selectedDespPaspartu}
-                      onChange={handleSelectDespPaspartuChange}
-                    />
-
                   </FormGroup>
                 </Item>
               </Box>
